@@ -1,0 +1,30 @@
+{
+  "name": "eslint-plugin-suitescript",
+  "version": "1.0.0",
+  "description": "Complete ESLint plugin for NetSuite's SuiteScript API",
+  "author": "Adam Davies <adam@adam-davies.me> (https://adam-davies.me)",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha \"tests/rules/*.js\" --recursive --reporter min"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "suitescript",
+    "netsuite",
+    "eslint",
+    "plugin",
+    "2.0",
+    "2.1",
+    "2.x"
+  ],
+  "peerDependencies": {
+    "eslint": ">=0.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "mocha": "^7.1.2"
+  }
+}
