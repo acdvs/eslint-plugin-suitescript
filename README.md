@@ -1,70 +1,67 @@
-<a href="https://travis-ci.org/adamdavies001/react-hooks-object-state"><img src="https://travis-ci.org/adamdavies001/react-hooks-object-state.svg?branch=master" alt="Travis Build Status"></a>
-<a href="https://ci.appveyor.com/project/adamdavies001/react-hooks-object-state"><img src="https://ci.appveyor.com/api/projects/status/jc0a2g2t7t4logcu/branch/master?svg=true" alt="Windows Build Status"></a>
-<a href="https://badge.fury.io/js/react-hooks-object-state"><img src="https://badge.fury.io/js/react-hooks-object-state.svg" alt="npm version"></a>
+eslint-plugin-suitescript
+===================
 
-## About
+NetSuite SuiteScript v1/v2 linting rules for ESLint
 
-This package is a React hook for partially updating object states within functional components that avoids the default behavior of `useState` that overwrites the entire object state. It reflects the merge behavior of `setState` used in classical components.
+## Installation
 
-**Use this** when you need an object state that shouldn't be split up into multiple states.  
-**Don't use this** if you only need an object state with a few simple properties.
+This repo currently does not have an NPM listing. To install it, download the source into a folder named `eslint-plugin-suitescript` and place it in your project's `node_modules` folder. From here, you can work with it exactly like any other NPM package.
 
-## Features
+## Configuration
 
-- Partially update object values in state without erasing any non-updated entries
-- Calculate new values based on the previous state with a function argument
+Add "suitescript" to the plugins section of your ESLint config file.
 
-## Install
-
-```bash
-$ npm install react-hooks-object-state
+```json
+{
+  "plugins": [
+    "suitescript"
+  ]
+}
 ```
 
-Peer dependencies: react (^16.8.0)
+Enable the rules that you would like to use.
 
-## Usage
-
-Within a functional component, simply declare and use the `useObjectState` hook to create a state object. Then pass any object updates to the returned setter function to update the original object.
-
-```jsx
-import React from 'react'
-import useObjectState from 'react-hooks-object-state'
-
-const Example = () => {
-  const [myObject, setMyObject] = useObjectState({bool: true, string: 'foo'})
-
-  const updateObject = () => {
-    setMyObject({bool: false})
+```json
+  "rules": {
+    "react/script-type": "error",
+    "react/no-log-module": "error",
   }
-
-  return <button onClick={updateObject}>Update object</button>
-}
-
-// myObject after update:
-// {
-//   bool: false,
-//   string: 'foo'
-// }
 ```
 
-#### Passing a function
+## List of supported rules
 
-Alternatively, you can pass a function to the setter if you need to use the previous state to calculate new state values.
+* [suitescript/api-version](docs/rules/api-version.md): Enforces valid `@NApiVersion` tag values
+* [suitescript/entry-points](docs/rules/entry-points.md): Enforces inclusion of at least one entry point based on `@NScriptType`
+* [suitescript/log-args](docs/rules/log-args.md): Enforces correct log arguments
+* [suitescript/module-vars](docs/rules/module-vars.md): Enforces correct module identifiers for each configured module
+* [suitescript/no-amd-name](docs/rules/no-amd-name.md): Restricts naming of AMD modules
+* [suitescript/no-extra-modules](docs/rules/no-extra-modules.md): Enforces equal number of module literals and identifiers
+* [suitescript/no-invalid-modules](docs/rules/no-invalid-modules.md): Enforces valid SuiteScript modules in `define` array
+* [suitescript/no-log-module](docs/rules/no-log-module.md): Restricts loading of the N/log module in favor of global `Log`
+* [suitescript/script-type](docs/rules/script-type.md): Enforces valid `@NScriptType` tag values
 
-```jsx
-const updateObject = () => {
-  setMyObject((state) => {
-    return {
-      string: state.str + 'bar'
-    }
-  })
-}
-```
+## License
 
-The use of `props` in function arguments is not included since hooks are not able to read component props, and workarounds would not effectively replicate the classical `setState` behavior.
+eslint-plugin-suitescript is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
 
-#### Additional info
 
-An initial object **must** be provided to `useObjectState`. This hook deep-merges objects by copying common entries from a source to a target object.
+[npm-url]: https://npmjs.org/package/eslint-plugin-react
+[npm-image]: https://img.shields.io/npm/v/eslint-plugin-react.svg
 
-Like the classical `setState` method, this does not create entries if they don't already exist. Providing an empty initial object will always result in an empty object.
+[travis-url]: https://travis-ci.org/yannickcr/eslint-plugin-react
+[travis-image]: https://img.shields.io/travis/yannickcr/eslint-plugin-react/master.svg
+
+[deps-url]: https://david-dm.org/yannickcr/eslint-plugin-react
+[deps-image]: https://img.shields.io/david/dev/yannickcr/eslint-plugin-react.svg
+
+[coverage-url]: https://coveralls.io/r/yannickcr/eslint-plugin-react?branch=master
+[coverage-image]: https://img.shields.io/coveralls/yannickcr/eslint-plugin-react/master.svg
+
+[climate-url]: https://codeclimate.com/github/yannickcr/eslint-plugin-react
+[climate-image]: https://img.shields.io/codeclimate/maintainability/yannickcr/eslint-plugin-react.svg
+
+[status-url]: https://github.com/yannickcr/eslint-plugin-react/pulse
+[status-image]: https://img.shields.io/github/last-commit/yannickcr/eslint-plugin-react.svg
+
+[tidelift-url]: https://tidelift.com/subscription/pkg/npm-eslint-plugin-react?utm_source=npm-eslint-plugin-react&utm_medium=referral&utm_campaign=readme
+[tidelift-image]: https://tidelift.com/badges/github/yannickcr/eslint-plugin-react?style=flat
