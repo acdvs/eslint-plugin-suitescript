@@ -1,5 +1,4 @@
-eslint-plugin-suitescript
-===================
+# eslint-plugin-suitescript
 
 NetSuite SuiteScript v1/v2 linting rules for ESLint
 
@@ -12,20 +11,16 @@ This repo currently does not have an NPM listing. To install it, download the so
 Add "suitescript" to the plugins section of your ESLint config file.
 
 ```json
-{
-  "plugins": [
-    "suitescript"
-  ]
-}
+"plugins": ["suitescript"]
 ```
 
 Enable the rules that you would like to use.
 
 ```json
-  "rules": {
-    "react/script-type": "error",
-    "react/no-log-module": "error",
-  }
+"rules": {
+  "suitescript/script-type": "error",
+  "suitescript/no-log-module": "error",
+}
 ```
 
 ## List of supported rules
@@ -43,25 +38,3 @@ Enable the rules that you would like to use.
 ## License
 
 eslint-plugin-suitescript is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
-
-
-[npm-url]: https://npmjs.org/package/eslint-plugin-react
-[npm-image]: https://img.shields.io/npm/v/eslint-plugin-react.svg
-
-[travis-url]: https://travis-ci.org/yannickcr/eslint-plugin-react
-[travis-image]: https://img.shields.io/travis/yannickcr/eslint-plugin-react/master.svg
-
-[deps-url]: https://david-dm.org/yannickcr/eslint-plugin-react
-[deps-image]: https://img.shields.io/david/dev/yannickcr/eslint-plugin-react.svg
-
-[coverage-url]: https://coveralls.io/r/yannickcr/eslint-plugin-react?branch=master
-[coverage-image]: https://img.shields.io/coveralls/yannickcr/eslint-plugin-react/master.svg
-
-[climate-url]: https://codeclimate.com/github/yannickcr/eslint-plugin-react
-[climate-image]: https://img.shields.io/codeclimate/maintainability/yannickcr/eslint-plugin-react.svg
-
-[status-url]: https://github.com/yannickcr/eslint-plugin-react/pulse
-[status-image]: https://img.shields.io/github/last-commit/yannickcr/eslint-plugin-react.svg
-
-[tidelift-url]: https://tidelift.com/subscription/pkg/npm-eslint-plugin-react?utm_source=npm-eslint-plugin-react&utm_medium=referral&utm_campaign=readme
-[tidelift-image]: https://tidelift.com/badges/github/yannickcr/eslint-plugin-react?style=flat
