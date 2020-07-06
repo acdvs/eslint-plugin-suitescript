@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-suitescript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Complete ESLint plugin for NetSuite's SuiteScript API",
   "author": "Adam Davies <adam@adam-davies.me> (https://adam-davies.me)",
   "license": "MIT",
