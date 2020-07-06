@@ -1,13 +1,13 @@
 {
   "name": "eslint-plugin-suitescript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Complete ESLint plugin for NetSuite's SuiteScript API",
   "author": "Adam Davies <adam@adam-davies.me> (https://adam-davies.me)",
   "license": "MIT",
   "homepage": "https://github.com/adamdavies001/eslint-plugin-suitescript#readme",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/adamdavies001/eslint-plugin-suitescript.git"
+    "type": "git",
+    "url": "https://github.com/adamdavies001/eslint-plugin-suitescript.git"
   },
   "bugs": "https://github.com/adamdavies001/eslint-plugin-suitescript/issues",
   "main": "index.js",
