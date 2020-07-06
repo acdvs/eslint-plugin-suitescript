@@ -4,6 +4,12 @@
   "description": "Complete ESLint plugin for NetSuite's SuiteScript API",
   "author": "Adam Davies <adam@adam-davies.me> (https://adam-davies.me)",
   "license": "MIT",
+  "homepage": "https://github.com/adamdavies001/eslint-plugin-suitescript#readme",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/adamdavies001/eslint-plugin-suitescript.git"
+  },
+  "bugs": "https://github.com/adamdavies001/eslint-plugin-suitescript/issues",
   "main": "index.js",
   "scripts": {
     "test": "mocha \"tests/rules/*.js\" --recursive --reporter min"
