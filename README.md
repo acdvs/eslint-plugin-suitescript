@@ -4,7 +4,9 @@ NetSuite SuiteScript v1/v2 linting rules for ESLint
 
 ## Installation
 
-This repo currently does not have an NPM listing. To install it, download the source into a folder named `eslint-plugin-suitescript` and place it in your project's `node_modules` folder. From here, you can work with it exactly like any other NPM package.
+```sh
+$ npm install eslint-plugin-suitescript
+```
 
 ## Configuration
 
