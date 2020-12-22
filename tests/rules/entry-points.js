@@ -81,6 +81,18 @@ ruleTester.run('entry-points', rule, {
         '  return { somethingElse: x };',
         '});'
       ].join('\n')
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define([], function() {',
+        '  var exports = {};',
+        '  exports.pageInit = x;',
+        '  return exports;',
+        '});'
+      ].join('\n')
     }
   ],
 
@@ -137,6 +149,19 @@ ruleTester.run('entry-points', rule, {
         '});'
       ].join('\n'),
       errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' }}]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define([], function() {',
+        '  var exports = {};',
+        '  exports.notAnEntryPoint = x;',
+        '  return exports;',
+        '});'
+      ].join('\n'),
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' }}]
     }
   ]
 });
