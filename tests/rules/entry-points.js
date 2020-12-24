@@ -162,6 +162,20 @@ ruleTester.run('entry-points', rule, {
         '});'
       ].join('\n'),
       errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' }}]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define([], function() {',
+        '  var exports = {};',
+        '  var notTheReturnObject = {};',
+        '  notTheReturnObject.pageInit = x;',
+        '  return exports;',
+        '});'
+      ].join('\n'),
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' }}]
     }
   ]
 });
