@@ -35,6 +35,7 @@ Enable the rules that you would like to use.
 * [suitescript/no-extra-modules](docs/rules/no-extra-modules.md): Enforces equal number of module literals and identifiers
 * [suitescript/no-invalid-modules](docs/rules/no-invalid-modules.md): Enforces valid SuiteScript modules in `define` array
 * [suitescript/no-log-module](docs/rules/no-log-module.md): Restricts loading of the N/log module in favor of global `Log`
+* [suitescript/no-module-extensions](docs/rules/no-module-extensions.md): Enforces no filename extensions on module dependencies
 * [suitescript/script-type](docs/rules/script-type.md): Enforces valid `@NScriptType` tag values
 
 ## License
