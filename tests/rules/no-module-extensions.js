@@ -32,6 +32,9 @@ ruleTester.run('no-module-extensions', rule, {
     },
     {
       code: 'define([], function() {});'
+    },
+    {
+      code: 'define(["N/record", "./lib"], (record, lib) => {});'
     }
   ],
 
@@ -50,6 +53,11 @@ ruleTester.run('no-module-extensions', rule, {
       code: 'define(["./lib1", "./lib2.js"], function(lib1, lib2) {});',
       errors: [{ messageId: 'invalidModuleExtension', data: { module: './lib2.js' }}],
       output: 'define(["./lib1", "./lib2"], function(lib1, lib2) {});'
+    },
+    {
+      code: 'define(["./lib1", "./lib2.js"], (lib1, lib2) => {});',
+      errors: [{ messageId: 'invalidModuleExtension', data: { module: './lib2.js' }}],
+      output: 'define(["./lib1", "./lib2"], (lib1, lib2) => {});'
     }
   ]
 });
