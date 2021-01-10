@@ -11,6 +11,7 @@ module.exports = {
     'log-args': require('./lib/rules/log-args'),
     'module-vars': require('./lib/rules/module-vars'),
     'no-amd-name': require('./lib/rules/no-amd-name'),
-    'entry-points': require('./lib/rules/entry-points')
+    'entry-points': require('./lib/rules/entry-points'),
+    'no-module-extensions': require('./lib/rules/no-module-extensions')
   }
 };
