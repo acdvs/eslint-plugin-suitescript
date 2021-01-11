@@ -1,6 +1,10 @@
-name: ESLint Tests
+name: CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
 
 jobs:
   test:
