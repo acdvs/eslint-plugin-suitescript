@@ -1,11 +1,23 @@
+[![License][license-img]][license-link]
+[![npm][npm-img]][npm-link]
+[![CI][ci-img]][ci-link]
+
 # eslint-plugin-suitescript
 
 NetSuite SuiteScript v1/v2 linting rules for ESLint
 
 ## Installation
 
+Local installation is highly recommended. First install ESLint:
+
 ```sh
-$ npm install eslint-plugin-suitescript
+$ npm install eslint --save-dev
+```
+
+Then install the plugin:
+
+```sh
+$ npm install eslint-plugin-suitescript --save-dev
 ```
 
 ## Configuration
@@ -41,3 +53,12 @@ Enable the rules that you would like to use.
 ## License
 
 eslint-plugin-suitescript is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+
+[license-img]: https://img.shields.io/github/license/acdvs/eslint-plugin-suitescript
+[license-link]: https://github.com/acdvs/eslint-plugin-suitescript/blob/master/LICENSE
+
+[npm-img]: https://img.shields.io/npm/v/eslint-plugin-suitescript
+[npm-link]: https://www.npmjs.com/package/eslint-plugin-suitescript
+
+[ci-img]: https://github.com/acdvs/eslint-plugin-suitescript/workflows/CI/badge.svg?event=release
+[ci-link]: https://github.com/eslint/eslint/actions
