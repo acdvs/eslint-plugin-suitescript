@@ -35,6 +35,56 @@ ruleTester.run('no-log-module', rule, {
     },
     {
       code: 'define([], function() {});'
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType',
+        ' */',
+        'define([], function() {});'
+      ].join('\n')
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType Suitelet',
+        ' */',
+        'define([], function() {});'
+      ].join('\n')
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType Suitelet',
+        ' */',
+        'define([], function() {});'
+      ].join('\n'),
+      options: [{ allowInClientScripts: false }]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define([], function() {});'
+      ].join('\n')
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define(["N/log"], function(log) {});'
+      ].join('\n')
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define(["N/log"], function(log) {});'
+      ].join('\n'),
+      options: [{ allowInClientScripts: true }]
     }
   ],
 
@@ -45,6 +95,45 @@ ruleTester.run('no-log-module', rule, {
     },
     {
       code: 'define(["N/record", "N/log"], function(record, log) {});',
+      errors: [{ messageId: 'useGlobalLog' }]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType Suitelet',
+        ' */',
+        'define(["N/log"], function(log) {});'
+      ].join('\n'),
+      errors: [{ messageId: 'useGlobalLog' }]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType Suitelet',
+        ' */',
+        'define(["N/log"], function(log) {});'
+      ].join('\n'),
+      options: [{ allowInClientScripts: true }],
+      errors: [{ messageId: 'useGlobalLog' }]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType Suitelet',
+        ' */',
+        'define(["N/log"], function(log) {});'
+      ].join('\n'),
+      options: [{ allowInClientScripts: false }],
+      errors: [{ messageId: 'useGlobalLog' }]
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType ClientScript',
+        ' */',
+        'define(["N/log"], function(log) {});'
+      ].join('\n'),
+      options: [{ allowInClientScripts: false }],
       errors: [{ messageId: 'useGlobalLog' }]
     }
   ]

@@ -1,6 +1,8 @@
 # suitescript/no-log-module
 
-Restricts loading of the N/log module in favor of global `Log`.
+Restricts loading of the N/log module in favor of global `log`.
+
+> **Note:** By default, the N/log module is allowed in client scripts because there it is used to log to NetSuite where it would otherwise be impossible. See the rule options below to modify this.
 
 ## Rule Details
 
@@ -21,6 +23,31 @@ define([], function() {
 
 define(['N/log'], function(log) {
   log.debug('Title', 'Details');
+});
+```
+
+## Rule Options
+
+```js
+'suitescript/no-log-module': [<enabled>, {
+  allowInClientScripts: <boolean>
+}]
+```
+
+### `allowInClientScripts`
+
+_default: true_
+
+Allows the N/log module to be loaded in client scripts.
+
+```js
+/* eslint suitescript/no-log-module: ["error", { allowInClientScripts: false }] */
+
+/**
+ * @NScriptType ClientScript',
+ */
+define([], function() {
+  console.log("can't use N\log");
 });
 ```
 
