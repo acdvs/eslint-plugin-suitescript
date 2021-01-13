@@ -2,7 +2,7 @@
 
 Enforces no filename extensions on module dependencies.
 
-As of January 2021, there appears to be a NetSuite bug that intermittently causes an error (`SuiteScript 2.1 entry point scripts must implement one script type function..`) when attempting to upload script files that include dependencies with file extensions.
+> **Note:** As of January 2021, there appears to be a NetSuite bug that intermittently causes an error (`SuiteScript 2.1 entry point scripts must implement one script type function..`) when attempting to upload script files that include dependencies with file extensions.
 
 ## Rule Details
 

@@ -50,6 +50,8 @@ log.audit({ details: 'Details' });
 
 ### `requireTitle`
 
+_default: true_
+
 Explicitly requires a `title` argument no matter what.
 
 ```js
@@ -59,6 +61,8 @@ log.debug({ title: 'Title' });
 ```
 
 ### `requireDetails`
+
+_default: true_
 
 Explicitly requires a `details` argument no matter what.
 
