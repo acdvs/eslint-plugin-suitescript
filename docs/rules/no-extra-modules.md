@@ -1,6 +1,6 @@
 # suitescript/no-extra-modules
 
-Enforces an equal number of module literals and identifiers in the `define` call.
+Enforces an equal number of module literals and identifiers in the `define` call arguments.
 
 ## Rule Details
 

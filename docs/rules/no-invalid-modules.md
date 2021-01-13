@@ -1,6 +1,6 @@
 # suitescript/no-invalid-modules
 
-Enforces valid SuiteScript module names in `define` array.
+Enforces valid SuiteScript module names in the `define` array.
 
 ## Rule Details
 

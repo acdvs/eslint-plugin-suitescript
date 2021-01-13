@@ -1,6 +1,10 @@
 # suitescript/no-amd-name
 
+:wrench: _The `--fix` option on the command line can automatically fix some of the problems reported by this rule._
+
 Restricts naming of AMD modules.
+
+Naming AMD modules [should generally be avoided](https://requirejs.org/docs/whyamd.html#namedmodules) because compilers will handle the ID-ing of modules internally where necessary.
 
 ## Rule Details
 

@@ -2,16 +2,9 @@
 
 Enforces correct module identifiers for each configured module name.
 
-## Rule Details
-
 Requires at least one module name to be specified to take effect.
 
-```js
-'suitescript/module-vars': [<enabled>, {
-  moduleName: <string>
-  ...
-}]
-```
+## Rule Details
 
 :white_check_mark: The following patterns are **correct**:
 
@@ -37,6 +30,17 @@ define(['N/record'], function(rec) {});
 /* eslint suitescript/module-vars: ["error", { "N/ui/serverWidget": "serverWidget" }] */
 
 define(['N/ui/serverWidget'], function(ui) {});
+```
+
+## Rule Options
+
+Specify at least one module name with a corresponding variable name.
+
+```js
+'suitescript/module-vars': [<enabled>, {
+  moduleName: <string>
+  ...
+}]
 ```
 
 ## Module Names

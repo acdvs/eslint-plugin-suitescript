@@ -2,9 +2,11 @@
 
 Restricts loading of the N/log module in favor of global `log`.
 
-> **Note:** By default, the N/log module is allowed in client scripts because there it is used to log to NetSuite where it would otherwise be impossible. See the rule options below to modify this.
+In most cases, global `log` can be used instead of the N/log module.
 
 ## Rule Details
+
+By default, the N/log module is allowed in client scripts because there it is used to log to NetSuite where it would otherwise be impossible. See the rule options below to modify this.
 
 :white_check_mark: The following pattern is **correct**:
 
