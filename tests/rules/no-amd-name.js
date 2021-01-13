@@ -29,25 +29,25 @@ ruleTester.run('no-amd-name', rule, {
     },
     {
       code: 'define(["N/search"], function(search) {});'
+    },
+    {
+      code: 'define("moduleName");'
+    },
+    {
+      code: 'define("moduleName", ["N/search"]);'
     }
   ],
 
   invalid: [
     {
       code: 'define("moduleName", [], function() {});',
-      errors: [{ messageId: 'noModuleName' }]
+      errors: [{ messageId: 'noModuleName' }],
+      output: 'define([], function() {});'
     },
     {
       code: 'define("moduleName", ["N/search"], function(search) {});',
-      errors: [{ messageId: 'noModuleName' }]
-    },
-    {
-      code: 'define("moduleName");',
-      errors: [{ messageId: 'noModuleName' }]
-    },
-    {
-      code: 'define("moduleName", ["N/search"]);',
-      errors: [{ messageId: 'noModuleName' }]
+      errors: [{ messageId: 'noModuleName' }],
+      output: 'define(["N/search"], function(search) {});'
     }
   ]
 });
