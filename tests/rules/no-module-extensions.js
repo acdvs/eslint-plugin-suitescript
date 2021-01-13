@@ -41,22 +41,22 @@ ruleTester.run('no-module-extensions', rule, {
   invalid: [
     {
       code: 'define(["./lib.js"], function(lib) {});',
-      errors: [{ messageId: 'invalidModuleExtension', data: { module: './lib.js' }}],
+      errors: [{ messageId: 'invalidModuleExtension' }],
       output: 'define(["./lib"], function(lib) {});'
     },
     {
       code: 'define([\'./lib.js\'], function(lib) {});',
-      errors: [{ messageId: 'invalidModuleExtension', data: { module: './lib.js' }}],
+      errors: [{ messageId: 'invalidModuleExtension' }],
       output: 'define([\'./lib\'], function(lib) {});'
     },
     {
       code: 'define(["./lib1", "./lib2.js"], function(lib1, lib2) {});',
-      errors: [{ messageId: 'invalidModuleExtension', data: { module: './lib2.js' }}],
+      errors: [{ messageId: 'invalidModuleExtension' }],
       output: 'define(["./lib1", "./lib2"], function(lib1, lib2) {});'
     },
     {
       code: 'define(["./lib1", "./lib2.js"], (lib1, lib2) => {});',
-      errors: [{ messageId: 'invalidModuleExtension', data: { module: './lib2.js' }}],
+      errors: [{ messageId: 'invalidModuleExtension' }],
       output: 'define(["./lib1", "./lib2"], (lib1, lib2) => {});'
     }
   ]
