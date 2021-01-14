@@ -60,5 +60,5 @@ eslint-plugin-suitescript is licensed under the [MIT License](http://www.opensou
 [npm-img]: https://img.shields.io/npm/v/eslint-plugin-suitescript
 [npm-link]: https://www.npmjs.com/package/eslint-plugin-suitescript
 
-[ci-img]: https://github.com/acdvs/eslint-plugin-suitescript/workflows/CI/badge.svg?event=release
-[ci-link]: https://github.com/eslint/eslint/actions
+[ci-img]: https://github.com/acdvs/eslint-plugin-suitescript/workflows/CI/badge.svg
+[ci-link]: https://github.com/acdvs/eslint-plugin-suitescript/actions
