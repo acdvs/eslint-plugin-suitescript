@@ -10,14 +10,15 @@
     "url": "https://github.com/acdvs/eslint-plugin-suitescript.git"
   },
   "bugs": "https://github.com/acdvs/eslint-plugin-suitescript/issues",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "pretest": "eslint \"**/*.js\" --ignore-pattern node_modules/",
     "test": "mocha \"tests/rules/*.js\" --recursive --reporter min"
   },
   "files": [
-    "lib",
-    "docs"
+    "LICENSE",
+    "README.md",
+    "lib"
   ],
   "keywords": [
     "suitescript",
