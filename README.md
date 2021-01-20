@@ -37,6 +37,17 @@ Enable the rules that you would like to use.
 }
 ```
 
+Or use a predefined setting for quick setup (choose one).
+
+```json
+// All available rules
+"extends": ["plugin:suitescript/all"]
+
+// Just the recommended rules
+"extends": ["plugin:suitescript/recommended"]
+```
+
+
 ## List of supported rules
 
 * [suitescript/api-version](docs/rules/api-version.md): Enforces valid `@NApiVersion` tag values
