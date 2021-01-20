@@ -2,7 +2,7 @@
 
 :wrench: _The `--fix` option on the command line can automatically fix some of the problems reported by this rule._
 
-Enforces no filename extensions on module dependencies.
+Restricts filename extensions on module dependencies.
 
 > **Note:** As of January 2021, there appears to be a NetSuite bug that intermittently causes an error (`SuiteScript 2.1 entry point scripts must implement one script type function..`) when attempting to upload script files that include dependencies with file extensions.
 

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Enforce no filename extensions on module dependencies
+ * @fileoverview Restrict filename extensions on module dependencies
  * @author Michoel Chaikin
  */
 
