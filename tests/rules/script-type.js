@@ -120,6 +120,13 @@ ruleTester.run('script-type', rule, {
     },
     {
       code: '// @NScriptType SuiteletScript'
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType fiParserPlugin',
+        ' */'
+      ].join('\n')
     }
   ],
 
