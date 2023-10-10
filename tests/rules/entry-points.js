@@ -14,7 +14,7 @@ const rule = require('../../lib/rules/entry-points');
 
 const parserOptions = {
   ecmaVersion: 2015,
-  sourceType: 'module'
+  sourceType: 'module',
 };
 
 // ------------------------------------------------------------------------------
@@ -31,8 +31,8 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return { beforeSubmit: x };',
-        '});'
-      ].join('\n')
+        '});',
+      ].join('\n'),
     },
     {
       code: [
@@ -41,8 +41,8 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return { pageInit: x };',
-        '});'
-      ].join('\n')
+        '});',
+      ].join('\n'),
     },
     {
       code: [
@@ -51,16 +51,11 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return { pageInit: function() {} };',
-        '});'
-      ].join('\n')
+        '});',
+      ].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType',
-        ' */',
-        'define([], function() {});'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType', ' */', 'define([], function() {});'].join('\n'),
     },
     {
       code: [
@@ -69,8 +64,8 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return;',
-        '});'
-      ].join('\n')
+        '});',
+      ].join('\n'),
     },
     {
       code: [
@@ -79,8 +74,8 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return { somethingElse: x };',
-        '});'
-      ].join('\n')
+        '});',
+      ].join('\n'),
     },
     {
       code: [
@@ -91,20 +86,17 @@ ruleTester.run('entry-points', rule, {
         '  var exports = {};',
         '  exports.pageInit = x;',
         '  return exports;',
-        '});'
-      ].join('\n')
-    }
+        '});',
+      ].join('\n'),
+    },
   ],
 
   invalid: [
     {
-      code: [
-        '/**',
-        ' * @NScriptType Restlet',
-        ' */',
-        'define([], function() {});'
-      ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' }}]
+      code: ['/**', ' * @NScriptType Restlet', ' */', 'define([], function() {});'].join(
+        '\n',
+      ),
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' } }],
     },
     {
       code: [
@@ -113,9 +105,9 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return;',
-        '});'
+        '});',
       ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' }}]
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' } }],
     },
     {
       code: [
@@ -124,9 +116,9 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return x;',
-        '});'
+        '});',
       ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' }}]
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' } }],
     },
     {
       code: [
@@ -135,9 +127,9 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return { notAnEntryPoint };',
-        '});'
+        '});',
       ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' }}]
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' } }],
     },
     {
       code: [
@@ -146,9 +138,9 @@ ruleTester.run('entry-points', rule, {
         ' */',
         'define([], function() {',
         '  return { notAnEntryPoint: x };',
-        '});'
+        '});',
       ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' }}]
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'Restlet' } }],
     },
     {
       code: [
@@ -159,9 +151,9 @@ ruleTester.run('entry-points', rule, {
         '  var exports = {};',
         '  exports.notAnEntryPoint = x;',
         '  return exports;',
-        '});'
+        '});',
       ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' }}]
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
     },
     {
       code: [
@@ -173,9 +165,9 @@ ruleTester.run('entry-points', rule, {
         '  var notTheReturnObject = {};',
         '  notTheReturnObject.pageInit = x;',
         '  return exports;',
-        '});'
+        '});',
       ].join('\n'),
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' }}]
-    }
-  ]
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+    },
+  ],
 });

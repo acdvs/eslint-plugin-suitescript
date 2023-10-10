@@ -14,7 +14,7 @@ const rule = require('../../lib/rules/no-module-extensions');
 
 const parserOptions = {
   ecmaVersion: 2015,
-  sourceType: 'module'
+  sourceType: 'module',
 };
 
 // ------------------------------------------------------------------------------
@@ -25,39 +25,39 @@ const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-module-extensions', rule, {
   valid: [
     {
-      code: 'define(["./lib"], function(lib) {});'
+      code: 'define(["./lib"], function(lib) {});',
     },
     {
-      code: 'define(["N/record", "./lib"], function(record, lib) {});'
+      code: 'define(["N/record", "./lib"], function(record, lib) {});',
     },
     {
-      code: 'define([], function() {});'
+      code: 'define([], function() {});',
     },
     {
-      code: 'define(["N/record", "./lib"], (record, lib) => {});'
-    }
+      code: 'define(["N/record", "./lib"], (record, lib) => {});',
+    },
   ],
 
   invalid: [
     {
       code: 'define(["./lib.js"], function(lib) {});',
       errors: [{ messageId: 'invalidModuleExtension' }],
-      output: 'define(["./lib"], function(lib) {});'
+      output: 'define(["./lib"], function(lib) {});',
     },
     {
-      code: 'define([\'./lib.js\'], function(lib) {});',
+      code: "define(['./lib.js'], function(lib) {});",
       errors: [{ messageId: 'invalidModuleExtension' }],
-      output: 'define([\'./lib\'], function(lib) {});'
+      output: "define(['./lib'], function(lib) {});",
     },
     {
       code: 'define(["./lib1", "./lib2.js"], function(lib1, lib2) {});',
       errors: [{ messageId: 'invalidModuleExtension' }],
-      output: 'define(["./lib1", "./lib2"], function(lib1, lib2) {});'
+      output: 'define(["./lib1", "./lib2"], function(lib1, lib2) {});',
     },
     {
       code: 'define(["./lib1", "./lib2.js"], (lib1, lib2) => {});',
       errors: [{ messageId: 'invalidModuleExtension' }],
-      output: 'define(["./lib1", "./lib2"], (lib1, lib2) => {});'
-    }
-  ]
+      output: 'define(["./lib1", "./lib2"], (lib1, lib2) => {});',
+    },
+  ],
 });
