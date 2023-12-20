@@ -14,7 +14,7 @@ const rule = require('../../lib/rules/script-type');
 
 const parserOptions = {
   ecmaVersion: 2015,
-  sourceType: 'module'
+  sourceType: 'module',
 };
 
 // ------------------------------------------------------------------------------
@@ -25,81 +25,37 @@ const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('script-type', rule, {
   valid: [
     {
-      code: [
-        '/**',
-        ' * @NScriptType BundleInstallationScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType BundleInstallationScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType ClientScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType ClientScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType MapReduceScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType MapReduceScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType MassUpdateScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType MassUpdateScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Portlet',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType Portlet', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Restlet',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType Restlet', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType ScheduledScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType ScheduledScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType SDFInstallationScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType SDFInstallationScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Suitelet',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType Suitelet', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType UserEventScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType UserEventScript', ' */'].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType WorkflowActionScript',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * @NScriptType WorkflowActionScript', ' */'].join('\n'),
     },
     {
       code: [
@@ -108,53 +64,36 @@ ruleTester.run('script-type', rule, {
         ' */',
         '/**',
         ' * @NScriptType SuiteletScript',
-        ' */'
-      ].join('\n')
+        ' */',
+      ].join('\n'),
     },
     {
-      code: [
-        '/**',
-        ' * Not a script type tag',
-        ' */'
-      ].join('\n')
+      code: ['/**', ' * Not a script type tag', ' */'].join('\n'),
     },
     {
-      code: '// @NScriptType SuiteletScript'
-    }
+      code: '// @NScriptType SuiteletScript',
+    },
+    {
+      code: ['/**', ' * @NScriptType fiParserPlugin', ' */'].join('\n'),
+    },
   ],
 
   invalid: [
     {
-      code: [
-        '/**',
-        ' * @NScriptType',
-        ' */'
-      ].join('\n'),
-      errors: [{ messageId: 'noValue' }]
+      code: ['/**', ' * @NScriptType', ' */'].join('\n'),
+      errors: [{ messageId: 'noValue' }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType PortletScript',
-        ' */'
-      ].join('\n'),
-      errors: [{ messageId: 'invalidValue', data: { value: 'PortletScript' }}]
+      code: ['/**', ' * @NScriptType PortletScript', ' */'].join('\n'),
+      errors: [{ messageId: 'invalidValue', data: { value: 'PortletScript' } }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType RestletScript',
-        ' */'
-      ].join('\n'),
-      errors: [{ messageId: 'invalidValue', data: { value: 'RestletScript' }}]
+      code: ['/**', ' * @NScriptType RestletScript', ' */'].join('\n'),
+      errors: [{ messageId: 'invalidValue', data: { value: 'RestletScript' } }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType SuiteletScript',
-        ' */'
-      ].join('\n'),
-      errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' }}]
+      code: ['/**', ' * @NScriptType SuiteletScript', ' */'].join('\n'),
+      errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
     },
     {
       code: [
@@ -163,9 +102,9 @@ ruleTester.run('script-type', rule, {
         ' */',
         '/**',
         ' * @NScriptType Suitelet',
-        ' */'
+        ' */',
       ].join('\n'),
-      errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' }}]
-    }
-  ]
+      errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
+    },
+  ],
 });
