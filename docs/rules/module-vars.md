@@ -50,11 +50,15 @@ Specify at least one module name with a corresponding variable name.
 - N/cache
 - N/certificateControl
 - N/commerce/recordView
+- N/compress
 - N/config
 - N/crypto
 - N/crypto/certificate
+- N/crypto/random
 - N/currency
 - N/currentRecord
+- N/dataset
+- N/datasetLink
 - N/email
 - N/encode
 - N/error
@@ -70,6 +74,7 @@ Specify at least one module name with a corresponding variable name.
 - N/plugin
 - N/portlet
 - N/query
+- N/recordContext
 - N/record
 - N/redirect
 - N/render
@@ -77,6 +82,7 @@ Specify at least one module name with a corresponding variable name.
 - N/search
 - N/sftp
 - N/sso
+- N/suiteAppInfo
 - N/task
 - N/task/accounting/recognition
 - N/transaction
@@ -87,6 +93,7 @@ Specify at least one module name with a corresponding variable name.
 - N/url
 - N/util
 - N/workflow
+- N/workbook
 - N/xml
 
 ## Version
