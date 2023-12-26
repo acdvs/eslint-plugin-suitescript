@@ -11,12 +11,13 @@ Requires at least one module name to be specified to take effect.
 ```js
 /* eslint suitescript/module-vars: ["error", { "N/record": "record" }] */
 
-define(['N/record'], function(record) {});
+define(['N/record'], function (record) {});
 ```
+
 ```js
 /* eslint suitescript/module-vars: ["error", { "N/ui/message": "message" }] */
 
-define(['N/ui/message'], function(message) {});
+define(['N/ui/message'], function (message) {});
 ```
 
 :x: The following patterns are **incorrect**:
@@ -24,12 +25,13 @@ define(['N/ui/message'], function(message) {});
 ```js
 /* eslint suitescript/module-vars: ["error", { "N/record": "record" }] */
 
-define(['N/record'], function(rec) {});
+define(['N/record'], function (rec) {});
 ```
+
 ```js
 /* eslint suitescript/module-vars: ["error", { "N/ui/serverWidget": "serverWidget" }] */
 
-define(['N/ui/serverWidget'], function(ui) {});
+define(['N/ui/serverWidget'], function (ui) {});
 ```
 
 ## Rule Options
@@ -74,8 +76,8 @@ Specify at least one module name with a corresponding variable name.
 - N/plugin
 - N/portlet
 - N/query
-- N/recordContext
 - N/record
+- N/recordContext
 - N/redirect
 - N/render
 - N/runtime
@@ -92,8 +94,8 @@ Specify at least one module name with a corresponding variable name.
 - N/ui/serverWidget
 - N/url
 - N/util
-- N/workflow
 - N/workbook
+- N/workflow
 - N/xml
 
 ## Version
