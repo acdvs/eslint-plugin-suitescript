@@ -75,67 +75,7 @@ define([], function () {
 
 ### Script Types and Their Respective Entry Points
 
-- BundleInstallationScript
-  - afterInstall
-  - afterUpdate
-  - beforeInstall
-  - beforeUninstall
-  - beforeUpdate
-- ClientScript
-  - fieldChanged
-  - lineInit
-  - pageInit
-  - postSourcing
-  - saveRecord
-  - sublistChanged
-  - validateDelete
-  - validateField
-  - validateInsert
-  - validateLine
-  - localizationContextEnter
-  - localizationContextExit
-- MapReduceScript
-  - getInputData
-  - map
-  - reduce
-  - summarize
-- MassUpdateScript
-  - each
-- Portlet
-  - render
-- Restlet
-  - delete
-  - get
-  - post
-  - put
-- ScheduledScript
-  - execute
-- SDFInstallationScript
-  - run
-- Suitelet
-  - onRequest
-- UserEventScript
-  - afterSubmit
-  - beforeLoad
-  - beforeSubmit
-- WorkflowActionScript
-  - onAction
-- bankConnectivityPlugin
-  - getRequiredConfigurationFields
-  - downloadPreviousDayBankStatementFile
-- datasetbuilderplugin
-  - createDataset
-- fiConnectivityPlugin
-  - getConfigurationIFrameUrl
-  - getAccounts
-  - getTransactionData
-- fiParserPlugin
-  - parseData
-  - getStandardTransactionCodes
-  - getExpenseCodes
-  - getConfigurationPageUrl
-- workbookbuilderplugin
-  - createWorkbook
+<ENTRY_POINTS>
 
 ## Version
 

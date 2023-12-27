@@ -12,6 +12,7 @@
   "bugs": "https://github.com/acdvs/eslint-plugin-suitescript/issues",
   "main": "./lib/index.js",
   "scripts": {
+    "build:docs": "node scripts/generate_docs.js",
     "lint": "prettier -c {lib,tests}/**/*.js",
     "lint:fix": "prettier -w {lib,tests}/**/*.js",
     "pretest": "eslint \"**/*.js\" --ignore-pattern node_modules/",
