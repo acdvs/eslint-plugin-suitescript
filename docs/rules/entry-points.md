@@ -136,6 +136,7 @@ define([], function () {
   - getConfigurationPageUrl
 - workbookbuilderplugin
   - createWorkbook
+- plugintypeimpl
 
 ## Version
 

@@ -62,6 +62,7 @@ Valid tag values are found below.
 - fiConnectivityPlugin
 - fiParserPlugin
 - workbookbuilderplugin
+- plugintypeimpl
 
 ## Version
 
