@@ -89,6 +89,26 @@ ruleTester.run('entry-points', rule, {
         '});',
       ].join('\n'),
     },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType plugintypeimpl',
+        ' */',
+        'define([], function() {',
+        '  return {};',
+        '});',
+      ].join('\n'),
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType plugintypeimpl',
+        ' */',
+        'define([], function() {',
+        '  return { customFn: function() {} };',
+        '});',
+      ].join('\n'),
+    },
   ],
 
   invalid: [
