@@ -39,6 +39,12 @@ ruleTester.run('no-invalid-modules', rule, {
     {
       code: 'define([], function() {});',
     },
+    {
+      code: 'define(["N/scriptTypes/restlet"], function(restlet) {});',
+    },
+    {
+      code: 'define(["customModule", "N/scriptTypes/restlet"], function(customModule, restlet) {});',
+    },
   ],
 
   invalid: [
