@@ -76,6 +76,9 @@ ruleTester.run('script-type', rule, {
     {
       code: ['/**', ' * @NScriptType fiParserPlugin', ' */'].join('\n'),
     },
+    {
+      code: ['/**', ' * @NScriptType bankStatementParserPlugin', ' */'].join('\n'),
+    },
   ],
 
   invalid: [

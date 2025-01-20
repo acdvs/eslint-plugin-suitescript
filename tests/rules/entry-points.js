@@ -109,6 +109,16 @@ ruleTester.run('entry-points', rule, {
         '});',
       ].join('\n'),
     },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType bankStatementParserPlugin',
+        ' */',
+        'define([], function() {',
+        '  return { parseBankStatement: function() {}, getStandardTransactionCodes: function() {} };',
+        '});',
+      ].join('\n'),
+    },
   ],
 
   invalid: [
@@ -188,6 +198,19 @@ ruleTester.run('entry-points', rule, {
         '});',
       ].join('\n'),
       errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+    },
+    {
+      code: [
+        '/**',
+        ' * @NScriptType bankStatementParserPlugin',
+        ' */',
+        'define([], function() {',
+        '  return { parseBankStatement: function() {}, getStandardTransactionCodesWRONG: function() {} };',
+        '});',
+      ].join('\n'),
+      errors: [
+        { messageId: 'returnEntryPoint', data: { type: 'bankStatementParserPlugin' } },
+      ],
     },
   ],
 });
