@@ -1,10 +1,6 @@
-[![License][license-img]][license-link]
-[![npm][npm-img]][npm-link]
-[![CI][ci-img]][ci-link]
-
 # eslint-plugin-suitescript
 
-NetSuite SuiteScript v1/v2 linting rules for ESLint
+NetSuite SuiteScript v1/v2 linting rules for ESLint. This is a fork of the [original repo](https://github.com/acdvs/eslint-plugin-suitescript) of Adam Davies, which doesn't seem to be maintained anymore.
 
 ## Installation
 
@@ -57,10 +53,3 @@ Or use a predefined setting for quick setup (choose one).
 ## License
 
 eslint-plugin-suitescript is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
-
-[license-img]: https://img.shields.io/github/license/acdvs/eslint-plugin-suitescript
-[license-link]: https://github.com/acdvs/eslint-plugin-suitescript/blob/master/LICENSE
-[npm-img]: https://img.shields.io/npm/v/eslint-plugin-suitescript
-[npm-link]: https://www.npmjs.com/package/eslint-plugin-suitescript
-[ci-img]: https://github.com/acdvs/eslint-plugin-suitescript/workflows/CI/badge.svg
-[ci-link]: https://github.com/acdvs/eslint-plugin-suitescript/actions
