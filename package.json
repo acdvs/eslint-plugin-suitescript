@@ -41,5 +41,10 @@
   },
   "peerDependencies": {
     "eslint": "^8.51.0"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "semi": true,
+    "singleQuote": true
   }
 }
