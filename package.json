@@ -7,7 +7,7 @@
   "homepage": "https://github.com/acdvs/eslint-plugin-suitescript#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/acdvs/eslint-plugin-suitescript.git"
+    "url": "git+https://github.com/acdvs/eslint-plugin-suitescript.git"
   },
   "bugs": "https://github.com/acdvs/eslint-plugin-suitescript/issues",
   "main": "lib/index.js",
