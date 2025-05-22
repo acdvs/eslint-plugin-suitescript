@@ -81,6 +81,7 @@ Specify at least one module name with a corresponding variable name.
 - N/redirect
 - N/render
 - N/runtime
+- N/scriptTypes/restlet
 - N/search
 - N/sftp
 - N/sso

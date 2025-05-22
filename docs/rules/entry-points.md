@@ -97,6 +97,8 @@ define([], function () {
   - validateLine
   - localizationContextEnter
   - localizationContextExit
+- CustomGLPlugin
+  - customizeGlImpact
 - DatasetBuilderPlugin
   - createDataset
 - FiConnectivityPlugin

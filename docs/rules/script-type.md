@@ -49,6 +49,7 @@ Valid tag values are found below.
 - BankConnectivityPlugin
 - BundleInstallationScript
 - ClientScript
+- CustomGLPlugin
 - DatasetBuilderPlugin
 - FiConnectivityPlugin
 - FiParserPlugin
