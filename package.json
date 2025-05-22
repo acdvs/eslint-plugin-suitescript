@@ -32,8 +32,8 @@
   ],
   "devDependencies": {
     "eslint": "^8.51.0",
-    "eslint-config-prettier": "^9.0.0",
-    "mocha": "^7.1.2",
+    "eslint-config-prettier": "^10.1.5",
+    "mocha": "^11.4.0",
     "prettier": "^3.5.3"
   },
   "peerDependencies": {
