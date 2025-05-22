@@ -2,50 +2,27 @@ name: CI
 
 on:
   push:
-    paths:
-      - 'lib/**'
-      - 'tests/**'
   pull_request:
 
 jobs:
   lint:
-    name: Lint code
+    name: Check linting and formatting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Install packages
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
-
-      - name: Run tests
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: lint
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: |
+          yarn
+          yarn prettier . --debug-check
+      - run: |
+          yarn lint
 
   test:
     name: Test rules
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Install packages
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
-
-      - name: Run tests
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: test
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: |
+          yarn
+          yarn test
