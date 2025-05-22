@@ -1,13 +1,4 @@
-/**
- * @fileoverview Restrict loading of the N/log module to favor global Log
- * @author Adam Davies
- */
-
 'use strict';
-
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/no-log-module');
@@ -16,10 +7,6 @@ const parserOptions = {
   ecmaVersion: 2015,
   sourceType: 'module',
 };
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-log-module', rule, {
@@ -37,42 +24,53 @@ ruleTester.run('no-log-module', rule, {
       code: 'define([], function() {});',
     },
     {
-      code: ['/**', ' * @NScriptType', ' */', 'define([], function() {});'].join('\n'),
+      code: `
+/**
+ * @NScriptType
+ */
+define([], function() {});
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType Suitelet', ' */', 'define([], function() {});'].join(
-        '\n',
-      ),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+define([], function() {});
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType Suitelet', ' */', 'define([], function() {});'].join(
-        '\n',
-      ),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+define([], function() {});
+      `,
       options: [{ allowInClientScripts: false }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType ClientScript',
-        ' */',
-        'define([], function() {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], function() {});
+      `,
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType ClientScript',
-        ' */',
-        'define(["N/log"], function(log) {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define(["N/log"], function(log) {});
+      `,
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType ClientScript',
-        ' */',
-        'define(["N/log"], function(log) {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define(["N/log"], function(log) {});
+      `,
       options: [{ allowInClientScripts: true }],
     },
   ],
@@ -87,41 +85,41 @@ ruleTester.run('no-log-module', rule, {
       errors: [{ messageId: 'useGlobalLog' }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Suitelet',
-        ' */',
-        'define(["N/log"], function(log) {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+define(["N/log"], function(log) {});
+      `,
       errors: [{ messageId: 'useGlobalLog' }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Suitelet',
-        ' */',
-        'define(["N/log"], function(log) {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+define(["N/log"], function(log) {});
+      `,
       options: [{ allowInClientScripts: true }],
       errors: [{ messageId: 'useGlobalLog' }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Suitelet',
-        ' */',
-        'define(["N/log"], function(log) {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+define(["N/log"], function(log) {});
+      `,
       options: [{ allowInClientScripts: false }],
       errors: [{ messageId: 'useGlobalLog' }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType ClientScript',
-        ' */',
-        'define(["N/log"], function(log) {});',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define(["N/log"], function(log) {});
+      `,
       options: [{ allowInClientScripts: false }],
       errors: [{ messageId: 'useGlobalLog' }],
     },

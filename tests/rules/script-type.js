@@ -1,13 +1,4 @@
-/**
- * @fileoverview Enforce "@NScriptType" values
- * @author Adam Davies
- */
-
 'use strict';
-
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/script-type');
@@ -17,93 +8,157 @@ const parserOptions = {
   sourceType: 'module',
 };
 
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
-
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('script-type', rule, {
   valid: [
     {
-      code: ['/**', ' * @NScriptType BundleInstallationScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType BundleInstallationScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType ClientScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType MapReduceScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType MapReduceScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType MassUpdateScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType MassUpdateScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType Portlet', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType Portlet
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType Restlet', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType Restlet
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType ScheduledScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType ScheduledScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType SDFInstallationScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType SDFInstallationScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType Suitelet', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType UserEventScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType UserEventScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * @NScriptType WorkflowActionScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType WorkflowActionScript
+ */
+      `,
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType Suitelet',
-        ' */',
-        '/**',
-        ' * @NScriptType SuiteletScript',
-        ' */',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType Suitelet
+ */
+/**
+ * @NScriptType SuiteletScript
+ */
+      `,
     },
     {
-      code: ['/**', ' * Not a script type tag', ' */'].join('\n'),
+      code: `
+/**
+ * Not a script type tag
+ */
+      `,
     },
     {
       code: '// @NScriptType SuiteletScript',
     },
     {
-      code: ['/**', ' * @NScriptType fiParserPlugin', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType fiParserPlugin
+ */
+      `,
     },
   ],
 
   invalid: [
     {
-      code: ['/**', ' * @NScriptType', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType
+ */
+      `,
       errors: [{ messageId: 'noValue' }],
     },
     {
-      code: ['/**', ' * @NScriptType PortletScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType PortletScript
+ */
+      `,
       errors: [{ messageId: 'invalidValue', data: { value: 'PortletScript' } }],
     },
     {
-      code: ['/**', ' * @NScriptType RestletScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType RestletScript
+ */
+      `,
       errors: [{ messageId: 'invalidValue', data: { value: 'RestletScript' } }],
     },
     {
-      code: ['/**', ' * @NScriptType SuiteletScript', ' */'].join('\n'),
+      code: `
+/**
+ * @NScriptType SuiteletScript
+ */
+      `,
       errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
     },
     {
-      code: [
-        '/**',
-        ' * @NScriptType SuiteletScript',
-        ' */',
-        '/**',
-        ' * @NScriptType Suitelet',
-        ' */',
-      ].join('\n'),
+      code: `
+/**
+ * @NScriptType SuiteletScript
+ */
+/**
+ * @NScriptType Suitelet
+ */
+      `,
       errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
     },
   ],

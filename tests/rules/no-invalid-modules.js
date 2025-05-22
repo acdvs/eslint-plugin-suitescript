@@ -1,13 +1,4 @@
-/**
- * @fileoverview Enforce valid SuiteScript modules in define array
- * @author Adam Davies
- */
-
 'use strict';
-
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/no-invalid-modules');
@@ -16,10 +7,6 @@ const parserOptions = {
   ecmaVersion: 2015,
   sourceType: 'module',
 };
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-invalid-modules', rule, {

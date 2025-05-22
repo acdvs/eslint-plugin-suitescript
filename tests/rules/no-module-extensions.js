@@ -1,13 +1,4 @@
-/**
- * @fileoverview Restrict filename extensions on module dependencies
- * @author Michoel Chaikin
- */
-
 'use strict';
-
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/no-module-extensions');
@@ -16,10 +7,6 @@ const parserOptions = {
   ecmaVersion: 2015,
   sourceType: 'module',
 };
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-module-extensions', rule, {
