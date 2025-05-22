@@ -75,6 +75,9 @@ define([], function () {
 
 ### Script Types and Their Respective Entry Points
 
+- BankConnectivityPlugin
+  - getRequiredConfigurationFields
+  - downloadPreviousDayBankStatementFile
 - BundleInstallationScript
   - afterInstall
   - afterUpdate
@@ -94,6 +97,17 @@ define([], function () {
   - validateLine
   - localizationContextEnter
   - localizationContextExit
+- DatasetBuilderPlugin
+  - createDataset
+- FiConnectivityPlugin
+  - getConfigurationIFrameUrl
+  - getAccounts
+  - getTransactionData
+- FiParserPlugin
+  - parseData
+  - getStandardTransactionCodes
+  - getExpenseCodes
+  - getConfigurationPageUrl
 - MapReduceScript
   - getInputData
   - map
@@ -101,6 +115,7 @@ define([], function () {
   - summarize
 - MassUpdateScript
   - each
+- PluginTypeImpl
 - Portlet
   - render
 - Restlet
@@ -118,25 +133,11 @@ define([], function () {
   - afterSubmit
   - beforeLoad
   - beforeSubmit
+- WorkbookBbuilderPlugin
+  - createWorkbook
 - WorkflowActionScript
   - onAction
-- bankConnectivityPlugin
-  - getRequiredConfigurationFields
-  - downloadPreviousDayBankStatementFile
-- datasetbuilderplugin
-  - createDataset
-- fiConnectivityPlugin
-  - getConfigurationIFrameUrl
-  - getAccounts
-  - getTransactionData
-- fiParserPlugin
-  - parseData
-  - getStandardTransactionCodes
-  - getExpenseCodes
-  - getConfigurationPageUrl
-- workbookbuilderplugin
-  - createWorkbook
-- plugintypeimpl
+
 
 ## Version
 
