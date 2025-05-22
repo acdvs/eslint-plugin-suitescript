@@ -8,6 +8,6 @@
     "sourceType": "module"
   },
   "extends": [
-    "plugin:prettier/recommended"
+    "prettier"
   ]
 }
