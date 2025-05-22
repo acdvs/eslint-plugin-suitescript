@@ -53,7 +53,7 @@ ruleTester.run('api-version', rule, {
     {
       code: `
 /**
- * @NApiVersion 
+ * @NApiVersion
  */
       `,
       errors: [{ messageId: 'noValue' }],
