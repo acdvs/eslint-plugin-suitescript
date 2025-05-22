@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { MODULE_NAMES } = require('./../lib/util/modules');
-const { scriptTypeMap } = require('./../lib/util/scriptTypes');
+const { moduleNames } = require('./../lib/util/modules');
+const { scriptTypes } = require('./../lib/util/script-types');
 
 const SRC_DIR = './docs/src';
 const OUT_DIR = './docs/rules';
@@ -10,23 +10,23 @@ const SCRIPT_NAME = path.basename(__filename);
 const docsToModify = {
   'entry-points.md': {
     old: '<ENTRY_POINTS>',
-    new: Object.entries(scriptTypeMap).reduce((str, [scriptType, st]) => {
-      str += `- ${scriptType}\n`;
-      st.entryPoints.forEach((ep) => (str += `  - ${ep}\n`));
+    new: scriptTypes.reduce((str, x) => {
+      str += `- ${x.name}\n`;
+      x.entryPoints.forEach((ep) => (str += `  - ${ep}\n`));
       return str;
     }, ''),
   },
   'module-vars.md': {
     old: '<MODULE_NAMES>',
-    new: MODULE_NAMES.reduce((str, x) => {
+    new: moduleNames.reduce((str, x) => {
       str += `- ${x}\n`;
       return str;
     }, ''),
   },
   'script-type.md': {
     old: '<SCRIPT_TYPES>',
-    new: Object.keys(scriptTypeMap).reduce((str, x) => {
-      str += `- ${x}\n`;
+    new: scriptTypes.reduce((str, x) => {
+      str += `- ${x.name}\n`;
       return str;
     }, ''),
   },
