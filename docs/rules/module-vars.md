@@ -98,7 +98,6 @@ Specify at least one module name with a corresponding variable name.
 - N/workflow
 - N/xml
 
-
 ## Version
 
 This rule was introduced in version 1.0.0.

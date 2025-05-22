@@ -138,7 +138,6 @@ define([], function () {
 - WorkflowActionScript
   - onAction
 
-
 ## Version
 
 This rule was introduced in version 1.0.0.

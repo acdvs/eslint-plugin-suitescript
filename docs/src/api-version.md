@@ -27,6 +27,7 @@ Valid tag values are `1.0`, `2.x`, `2.0`, and `2.1`.
  * @NApiVersion
  */
 ```
+
 ```js
 /* eslint suitescript/api-version: "error" */
 
@@ -34,6 +35,7 @@ Valid tag values are `1.0`, `2.x`, `2.0`, and `2.1`.
  * @NApiVersion2
  */
 ```
+
 ```js
 /* eslint suitescript/api-version: "error" */
 

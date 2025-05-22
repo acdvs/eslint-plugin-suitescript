@@ -64,7 +64,6 @@ Valid tag values are found below.
 - WorkbookBbuilderPlugin
 - WorkflowActionScript
 
-
 ## Version
 
 This rule was introduced in version 1.0.0.

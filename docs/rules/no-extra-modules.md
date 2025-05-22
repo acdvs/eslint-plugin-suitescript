@@ -9,12 +9,13 @@ Enforces an equal number of module literals and identifiers in the `define` call
 ```js
 /* eslint suitescript/no-extra-modules: "error" */
 
-define([], function() {});
+define([], function () {});
 ```
+
 ```js
 /* eslint suitescript/no-extra-modules: "error" */
 
-define(['N/search'], function(search) {});
+define(['N/search'], function (search) {});
 ```
 
 :x: The following patterns are **incorrect**:
@@ -22,12 +23,13 @@ define(['N/search'], function(search) {});
 ```js
 /* eslint suitescript/no-extra-modules: "error" */
 
-define(['N/file'], function(file, record) {});
+define(['N/file'], function (file, record) {});
 ```
+
 ```js
 /* eslint suitescript/no-extra-modules: "error" */
 
-define(['N/file', 'N/record'], function(file) {});
+define(['N/file', 'N/record'], function (file) {});
 ```
 
 ## Version

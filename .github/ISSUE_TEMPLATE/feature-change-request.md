@@ -3,7 +3,6 @@ name: Feature/change request
 about: Suggest an new feature or change
 title: ''
 labels: feature-request
-
 ---
 
 **Is your feature request related to a problem? Please describe.**

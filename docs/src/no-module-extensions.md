@@ -13,7 +13,7 @@ Restricts filename extensions on module dependencies.
 ```js
 /* eslint suitescript/no-module-extensions: "error" */
 
-define(['./lib'], function(lib) {});
+define(['./lib'], function (lib) {});
 ```
 
 :x: The following pattern is **incorrect**:
@@ -21,7 +21,7 @@ define(['./lib'], function(lib) {});
 ```js
 /* eslint suitescript/no-module-extensions: "error" */
 
-define(['./lib.js'], function(lib) {});
+define(['./lib.js'], function (lib) {});
 ```
 
 ## Version

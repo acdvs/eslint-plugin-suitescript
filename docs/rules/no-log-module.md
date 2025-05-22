@@ -13,7 +13,7 @@ By default, the N/log module is allowed in client scripts because there it is us
 ```js
 /* eslint suitescript/no-log-module: "error" */
 
-define([], function() {
+define([], function () {
   log.debug('Title', 'Details');
 });
 ```
@@ -23,7 +23,7 @@ define([], function() {
 ```js
 /* eslint suitescript/no-log-module: "error" */
 
-define(['N/log'], function(log) {
+define(['N/log'], function (log) {
   log.debug('Title', 'Details');
 });
 ```
@@ -48,7 +48,7 @@ Allows the N/log module to be loaded in client scripts.
 /**
  * @NScriptType ClientScript',
  */
-define([], function() {
+define([], function () {
   console.log("can't use N\log");
 });
 ```

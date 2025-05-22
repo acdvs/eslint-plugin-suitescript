@@ -13,7 +13,7 @@ Naming AMD modules [should generally be avoided](https://requirejs.org/docs/whya
 ```js
 /* eslint suitescript/no-amd-name: "error" */
 
-define([], function() {});
+define([], function () {});
 ```
 
 :x: The following pattern is **incorrect**:
@@ -21,7 +21,7 @@ define([], function() {});
 ```js
 /* eslint suitescript/no-amd-name: "error" */
 
-define('myModule', [], function() {});
+define('myModule', [], function () {});
 ```
 
 ## Version

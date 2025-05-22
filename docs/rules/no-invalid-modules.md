@@ -9,17 +9,19 @@ Enforces valid SuiteScript module names in the `define` array.
 ```js
 /* eslint suitescript/no-invalid-modules: "error" */
 
-define(['N/record'], function(record) {});
+define(['N/record'], function (record) {});
 ```
+
 ```js
 /* eslint suitescript/no-invalid-modules: "error" */
 
-define(['N/https', 'N/search'], function(https, search) {});
+define(['N/https', 'N/search'], function (https, search) {});
 ```
+
 ```js
 /* eslint suitescript/no-invalid-modules: "error" */
 
-define(['customModule'], function(customModule) {});
+define(['customModule'], function (customModule) {});
 ```
 
 :x: The following pattern is **incorrect**:
@@ -27,7 +29,7 @@ define(['customModule'], function(customModule) {});
 ```js
 /* eslint suitescript/no-invalid-modules: "error" */
 
-define(['N/somethingElse'], function(somethingElse) {});
+define(['N/somethingElse'], function (somethingElse) {});
 ```
 
 ## Version

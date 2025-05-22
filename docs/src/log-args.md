@@ -13,11 +13,13 @@ If no options are provided, the rule will require both title and details.
 
 log.debug({ title: 'Title', details: 'Details' });
 ```
+
 ```js
 /* eslint suitescript/log-args: "error" */
 
 log.audit('Title', 'Details');
 ```
+
 ```js
 /* eslint suitescript/log-args: "error" */
 
@@ -31,6 +33,7 @@ log.error('', 'Details');
 
 log.debug('Title');
 ```
+
 ```js
 /* eslint suitescript/log-args: "error" */
 
