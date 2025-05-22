@@ -10,13 +10,14 @@
     "url": "https://github.com/acdvs/eslint-plugin-suitescript.git"
   },
   "bugs": "https://github.com/acdvs/eslint-plugin-suitescript/issues",
-  "main": "./lib/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build:docs": "node scripts/generate_docs.js",
-    "lint": "prettier -c {lib,tests}/**/*.js",
-    "lint:fix": "prettier -w {lib,tests}/**/*.js",
-    "pretest": "eslint \"**/*.js\" --ignore-pattern node_modules/",
-    "test": "mocha \"tests/rules/*.js\" --recursive --reporter min"
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write",
+    "lint": "eslint {lib,tests}/**",
+    "lint:fix": "eslint {lib,tests}/** --fix",
+    "test": "mocha tests/** --recursive --reporter min"
   },
   "files": [
     "LICENSE",
@@ -27,17 +28,13 @@
     "suitescript",
     "netsuite",
     "eslint",
-    "plugin",
-    "2.0",
-    "2.1",
-    "2.x"
+    "plugin"
   ],
   "devDependencies": {
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "mocha": "^7.1.2",
-    "prettier": "^3.0.3"
+    "prettier": "^3.5.3"
   },
   "peerDependencies": {
     "eslint": "^8.51.0"
