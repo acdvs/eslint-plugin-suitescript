@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { MODULE_NAMES } = require('./../lib/util/modules');
-const SCRIPT_TYPES = require('./../lib/util/scriptTypes');
+const { scriptTypeMap } = require('./../lib/util/scriptTypes');
 
 const SRC_DIR = './docs/src';
 const OUT_DIR = './docs/rules';
@@ -10,7 +10,7 @@ const SCRIPT_NAME = path.basename(__filename);
 const docsToModify = {
   'entry-points.md': {
     old: '<ENTRY_POINTS>',
-    new: Object.entries(SCRIPT_TYPES).reduce((str, [scriptType, st]) => {
+    new: Object.entries(scriptTypeMap).reduce((str, [scriptType, st]) => {
       str += `- ${scriptType}\n`;
       st.entryPoints.forEach((ep) => (str += `  - ${ep}\n`));
       return str;
@@ -25,7 +25,7 @@ const docsToModify = {
   },
   'script-type.md': {
     old: '<SCRIPT_TYPES>',
-    new: Object.keys(SCRIPT_TYPES).reduce((str, x) => {
+    new: Object.keys(scriptTypeMap).reduce((str, x) => {
       str += `- ${x}\n`;
       return str;
     }, ''),

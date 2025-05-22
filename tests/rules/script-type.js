@@ -21,7 +21,21 @@ ruleTester.run('script-type', rule, {
     {
       code: `
 /**
+ * @NScriptType bundleinstallationscript
+ */
+      `,
+    },
+    {
+      code: `
+/**
  * @NScriptType ClientScript
+ */
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType FiParserPlugin
  */
       `,
     },
@@ -107,13 +121,6 @@ ruleTester.run('script-type', rule, {
     },
     {
       code: '// @NScriptType SuiteletScript',
-    },
-    {
-      code: `
-/**
- * @NScriptType fiParserPlugin
- */
-      `,
     },
   ],
 
