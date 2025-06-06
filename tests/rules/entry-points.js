@@ -101,6 +101,16 @@ define([], function() {
 });
       `,
     },
+    {
+      code: `
+// no @NScriptType comment
+
+define([], function() {
+  return { foo: 'bar' };
+});
+      `,
+      // Should not error, since scriptType is null and rule should exit early
+    },
   ],
 
   invalid: [
