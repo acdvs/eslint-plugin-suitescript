@@ -6,7 +6,7 @@
 
 **Architecture:** Hard cut: drop legacy `eslintrc` config export and the `environments` API. Plugin exports a flat-config-shaped object with `meta`, `rules`, and `configs` (arrays of flat-config blocks). Globals previously delivered via `environments` are exposed as the new `configs.suitescript1` and `configs.suitescript2` flat configs.
 
-**Tech Stack:** Node.js 18.18+, ESLint 9/10, Mocha (existing), Prettier (existing). No new runtime dependencies.
+**Tech Stack:** Node.js ^20.19.0 || ^22.13.0 || >=24, ESLint 9/10, Mocha (existing), Prettier (existing). No new runtime dependencies.
 
 **Branch:** `feat/eslint-flat-config-v2` (already created).
 
@@ -107,7 +107,7 @@ Edit `package.json` so the relevant fields read:
     "eslint": ">=9.0.0"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "devDependencies": {
     "eslint": "^10.0.0",
@@ -662,7 +662,7 @@ Contents:
 
 ### Compatibility
 - Requires ESLint `>= 9.0.0`.
-- Requires Node.js `>= 18.18.0`.
+- Requires Node.js `^20.19.0 || ^22.13.0 || >=24`.
 ```
 
 - [ ] **Step 2: Commit**
@@ -699,7 +699,7 @@ ESLint **flat-config plugin** that provides lint rules for NetSuite SuiteScript 
 npm install
 ```
 
-Requires Node.js `>= 18.18.0` and npm.
+Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and npm.
 
 ## Common commands
 

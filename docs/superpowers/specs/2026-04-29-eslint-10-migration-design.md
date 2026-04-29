@@ -18,7 +18,7 @@ Make the plugin compatible with ESLint 9 and ESLint 10. Replace the legacy `esli
 ## Compatibility
 
 - **ESLint:** `>= 9.0.0`. Tested primarily against ESLint 10.
-- **Node.js:** `>= 18.18.0` (ESLint 9 floor).
+- **Node.js:** `^20.19.0 || ^22.13.0 || >=24` (ESLint 10 requirement).
 
 ## Public API
 
@@ -132,7 +132,7 @@ Test cases (`valid`/`invalid`) are unchanged.
     "eslint": ">=9.0.0"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "devDependencies": {
     "eslint": "^10.0.0",
