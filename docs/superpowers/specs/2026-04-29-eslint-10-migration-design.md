@@ -27,12 +27,22 @@ Make the plugin compatible with ESLint 9 and ESLint 10. Replace the legacy `esli
 ```js
 const plugin = {
   meta: { name: 'eslint-plugin-suitescript', version: '2.0.0' },
-  rules: { /* 10 rules, unchanged */ },
+  rules: {
+    /* 10 rules, unchanged */
+  },
   configs: {
-    recommended: [/* flat config */],
-    all:         [/* flat config */],
-    suitescript1: [/* SuiteScript 1.0 globals only */],
-    suitescript2: [/* SuiteScript 2.x globals only */],
+    recommended: [
+      /* flat config */
+    ],
+    all: [
+      /* flat config */
+    ],
+    suitescript1: [
+      /* SuiteScript 1.0 globals only */
+    ],
+    suitescript2: [
+      /* SuiteScript 2.x globals only */
+    ],
   },
 };
 ```
@@ -60,10 +70,10 @@ export default [
 
 Two locations use `context.getSourceCode()` (removed in ESLint 9):
 
-| File | Line | Change |
-|---|---|---|
-| `lib/rules/api-version.js` | 18 | `context.getSourceCode()` → `context.sourceCode` |
-| `lib/util/metadata.js` | 14 | `context.getSourceCode()` → `context.sourceCode` |
+| File                       | Line | Change                                           |
+| -------------------------- | ---- | ------------------------------------------------ |
+| `lib/rules/api-version.js` | 18   | `context.getSourceCode()` → `context.sourceCode` |
+| `lib/util/metadata.js`     | 14   | `context.getSourceCode()` → `context.sourceCode` |
 
 ### File Reorganization
 
@@ -110,7 +120,9 @@ const ruleSeverity = (rules) =>
 All ten files in `tests/rules/*.js` migrate from:
 
 ```js
-const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2015, sourceType: 'module' } });
+const ruleTester = new RuleTester({
+  parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+});
 ```
 
 to:

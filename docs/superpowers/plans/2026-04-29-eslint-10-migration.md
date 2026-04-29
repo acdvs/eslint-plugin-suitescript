@@ -21,6 +21,7 @@
 - [ ] **Step 1: Confirm clean working tree on the feature branch**
 
 Run:
+
 ```bash
 git status
 git rev-parse --abbrev-ref HEAD
@@ -31,6 +32,7 @@ Expected: clean tree, branch `feat/eslint-flat-config-v2`.
 - [ ] **Step 2: Install current deps and run the existing test suite**
 
 Run:
+
 ```bash
 npm install
 npm test
@@ -45,6 +47,7 @@ If tests fail here, STOP and investigate — the migration must start from a gre
 ### Task 2: Replace deprecated `context.getSourceCode()`
 
 **Files:**
+
 - Modify: `lib/util/metadata.js:14`
 - Modify: `lib/rules/api-version.js:18`
 
@@ -53,28 +56,35 @@ If tests fail here, STOP and investigate — the migration must start from a gre
 - [ ] **Step 1: Edit `lib/util/metadata.js` line 14**
 
 Replace:
+
 ```js
-  const sourceCode = context.getSourceCode();
+const sourceCode = context.getSourceCode();
 ```
+
 with:
+
 ```js
-  const sourceCode = context.sourceCode;
+const sourceCode = context.sourceCode;
 ```
 
 - [ ] **Step 2: Edit `lib/rules/api-version.js` line 18**
 
 Replace:
+
 ```js
-      const sourceCode = context.getSourceCode();
+const sourceCode = context.getSourceCode();
 ```
+
 with:
+
 ```js
-      const sourceCode = context.sourceCode;
+const sourceCode = context.sourceCode;
 ```
 
 - [ ] **Step 3: Run tests**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -84,6 +94,7 @@ Expected: all tests still green (rule behavior unchanged).
 - [ ] **Step 4: Commit**
 
 Run:
+
 ```bash
 git add lib/util/metadata.js lib/rules/api-version.js
 git commit -m "Replace deprecated context.getSourceCode() with context.sourceCode"
@@ -94,6 +105,7 @@ git commit -m "Replace deprecated context.getSourceCode() with context.sourceCod
 ### Task 3: Bump `package.json` to ESLint 10 and v2.0.0
 
 **Files:**
+
 - Modify: `package.json`
 
 - [ ] **Step 1: Update fields**
@@ -123,6 +135,7 @@ Leave `name`, `description`, `author`, `license`, `repository`, `bugs`, `homepag
 - [ ] **Step 2: Reinstall to pull ESLint 10**
 
 Run:
+
 ```bash
 npm install
 ```
@@ -132,6 +145,7 @@ Expected: installs `eslint@^10.0.0`. The yarn.lock will become stale; we will no
 - [ ] **Step 3: Run tests — they will fail**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -141,6 +155,7 @@ Expected: tests fail because `RuleTester` in ESLint 9+ no longer accepts `parser
 - [ ] **Step 4: Commit (red state, with explanation)**
 
 Run:
+
 ```bash
 git add package.json package-lock.json
 git commit -m "Bump eslint devDep to v10 and peerDep floor to v9"
@@ -153,11 +168,13 @@ If `package-lock.json` was not generated (project uses yarn), substitute `yarn.l
 ### Task 4: Migrate `RuleTester` calls in tests
 
 **Files:**
+
 - Modify (10 files): `tests/rules/api-version.js`, `tests/rules/entry-points.js`, `tests/rules/log-args.js`, `tests/rules/module-vars.js`, `tests/rules/no-amd-name.js`, `tests/rules/no-extra-modules.js`, `tests/rules/no-invalid-modules.js`, `tests/rules/no-log-module.js`, `tests/rules/no-module-extensions.js`, `tests/rules/script-type.js`
 
 The mechanical change in each file:
 
 **Before:**
+
 ```js
 const parserOptions = {
   ecmaVersion: 2015,
@@ -168,6 +185,7 @@ const ruleTester = new RuleTester({ parserOptions });
 ```
 
 **After:**
+
 ```js
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -182,6 +200,7 @@ If a specific test file overrides `parserOptions` per test case (e.g. `{ code, p
 - [ ] **Step 1: Apply the rewrite to all 10 files**
 
 For each file in `tests/rules/`:
+
 1. Remove the `const parserOptions = { ... };` block.
 2. Replace `new RuleTester({ parserOptions })` with `new RuleTester({ languageOptions: { ecmaVersion: 2015, sourceType: 'module' } })`.
 3. If any per-test-case `parserOptions` field exists, rename it to `languageOptions` (same shape).
@@ -189,6 +208,7 @@ For each file in `tests/rules/`:
 - [ ] **Step 2: Run tests**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -198,6 +218,7 @@ Expected: all tests green.
 - [ ] **Step 3: Commit**
 
 Run:
+
 ```bash
 git add tests/rules/
 git commit -m "Migrate RuleTester to languageOptions"
@@ -230,6 +251,7 @@ module.exports = {
 - [ ] **Step 1: Identify files needing the change**
 
 Run:
+
 ```bash
 grep -L "schema:" lib/rules/*.js
 ```
@@ -243,6 +265,7 @@ For each listed rule, insert `schema: [],` between `type:` and `messages:` insid
 - [ ] **Step 3: Run tests**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -252,6 +275,7 @@ Expected: all tests green, no schema-related warnings.
 - [ ] **Step 4: Commit**
 
 Run:
+
 ```bash
 git add lib/rules/
 git commit -m "Add schema: [] to option-less rules"
@@ -262,6 +286,7 @@ git commit -m "Add schema: [] to option-less rules"
 ### Task 6: Create `lib/util/globals.js` (replaces `lib/environments.js`)
 
 **Files:**
+
 - Create: `lib/util/globals.js`
 
 The new file exposes the same NetSuite globals as plain `globals` objects (no `environments` wrapper), with values switched from `false` to `'readonly'` (flat-config equivalent).
@@ -294,6 +319,7 @@ When generating the file, take the full list of identifiers from the existing `l
 - [ ] **Step 2: Sanity check the export shape**
 
 Run:
+
 ```bash
 node -e "const g = require('./lib/util/globals'); console.log(Object.keys(g.suitescript1).length, Object.keys(g.suitescript2).length);"
 ```
@@ -303,6 +329,7 @@ Expected output (matches the current `environments.js` count): a number around `
 - [ ] **Step 3: Commit**
 
 Run:
+
 ```bash
 git add lib/util/globals.js
 git commit -m "Add lib/util/globals.js with SuiteScript 1/2 globals"
@@ -315,6 +342,7 @@ git commit -m "Add lib/util/globals.js with SuiteScript 1/2 globals"
 ### Task 7: Rewrite `lib/index.js` and delete `lib/environments.js`
 
 **Files:**
+
 - Modify: `lib/index.js` (full rewrite)
 - Delete: `lib/environments.js`
 
@@ -382,12 +410,8 @@ const baseConfig = {
 plugin.configs = {
   recommended: [baseConfig],
   all: [baseConfig],
-  suitescript1: [
-    { languageOptions: { globals: globals.suitescript1 } },
-  ],
-  suitescript2: [
-    { languageOptions: { globals: globals.suitescript2 } },
-  ],
+  suitescript1: [{ languageOptions: { globals: globals.suitescript1 } }],
+  suitescript2: [{ languageOptions: { globals: globals.suitescript2 } }],
 };
 
 module.exports = plugin;
@@ -396,6 +420,7 @@ module.exports = plugin;
 - [ ] **Step 2: Delete `lib/environments.js`**
 
 Run:
+
 ```bash
 git rm lib/environments.js
 ```
@@ -403,6 +428,7 @@ git rm lib/environments.js
 - [ ] **Step 3: Run tests**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -412,6 +438,7 @@ Expected: all tests green. (Tests import rules directly, not configs, so this re
 - [ ] **Step 4: Commit**
 
 Run:
+
 ```bash
 git add lib/index.js
 git commit -m "Rewrite plugin entry as flat-config-only and drop environments export"
@@ -422,6 +449,7 @@ git commit -m "Rewrite plugin entry as flat-config-only and drop environments ex
 ### Task 8: Smoke-test the flat configs end-to-end
 
 **Files:**
+
 - Create (temporary): `/tmp/eslint-plugin-suitescript-smoke/eslint.config.mjs`
 - Create (temporary): `/tmp/eslint-plugin-suitescript-smoke/sample.js`
 
@@ -430,6 +458,7 @@ This task is throwaway — it verifies the plugin works when consumed via flat c
 - [ ] **Step 1: Set up the smoke directory**
 
 Run:
+
 ```bash
 mkdir -p /tmp/eslint-plugin-suitescript-smoke
 cd /tmp/eslint-plugin-suitescript-smoke
@@ -441,18 +470,17 @@ npm install /Users/agerber/github/eslint-plugin-suitescript
 - [ ] **Step 2: Create `eslint.config.mjs`**
 
 Contents:
+
 ```js
 import suitescript from 'eslint-plugin-suitescript';
 
-export default [
-  ...suitescript.configs.recommended,
-  ...suitescript.configs.suitescript2,
-];
+export default [...suitescript.configs.recommended, ...suitescript.configs.suitescript2];
 ```
 
 - [ ] **Step 3: Create a clean sample SuiteScript file `sample.js`**
 
 Contents:
+
 ```js
 /**
  * @NApiVersion 2.x
@@ -469,6 +497,7 @@ define(['N/log'], function (logModule) {
 - [ ] **Step 4: Lint it**
 
 Run:
+
 ```bash
 npx eslint sample.js
 ```
@@ -478,6 +507,7 @@ Expected: ESLint reports the `no-log-module` violation (loading `N/log` is restr
 - [ ] **Step 5: Create an invalid sample to confirm rules fire**
 
 Append to `sample.js`:
+
 ```js
 /**
  * @NApiVersion 9.x
@@ -485,6 +515,7 @@ Append to `sample.js`:
 ```
 
 Run:
+
 ```bash
 npx eslint sample.js
 ```
@@ -494,6 +525,7 @@ Expected: additional `api-version` violation reported.
 - [ ] **Step 6: Tear down**
 
 Run:
+
 ```bash
 cd /Users/agerber/github/eslint-plugin-suitescript
 rm -rf /tmp/eslint-plugin-suitescript-smoke
@@ -545,6 +577,7 @@ For each rule file, insert a `docs` block as shown above using the description a
 - [ ] **Step 2: Run tests**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -554,6 +587,7 @@ Expected: all tests green.
 - [ ] **Step 3: Commit**
 
 Run:
+
 ```bash
 git add lib/rules/
 git commit -m "Add meta.docs to all rules"
@@ -564,6 +598,7 @@ git commit -m "Add meta.docs to all rules"
 ### Task 10: Rewrite the `Configuration` section of `README.md`
 
 **Files:**
+
 - Modify: `README.md`
 
 - [ ] **Step 1: Replace the `## Installation` and `## Configuration` sections**
@@ -628,6 +663,7 @@ Leave the `## List of supported rules` and `## License` sections unchanged.
 - [ ] **Step 2: Commit**
 
 Run:
+
 ```bash
 git add README.md
 git commit -m "Document flat-config usage and v1 -> v2 migration"
@@ -638,6 +674,7 @@ git commit -m "Document flat-config usage and v1 -> v2 migration"
 ### Task 11: Add `CHANGELOG.md`
 
 **Files:**
+
 - Create: `CHANGELOG.md`
 
 - [ ] **Step 1: Create the file**
@@ -650,17 +687,20 @@ Contents:
 ## 2.0.0
 
 ### Breaking
+
 - Drop ESLint 8 / `.eslintrc.*` config support. Flat config (`eslint.config.js`) is now required.
 - Remove the `environments` plugin export. SuiteScript globals are now delivered via the new flat configs `configs.suitescript1` and `configs.suitescript2`.
 - Rename plugin export to a flat-config plugin object with `meta`, `rules`, and `configs`.
 
 ### Internal
+
 - Replace deprecated `context.getSourceCode()` with `context.sourceCode`.
 - Add `meta.schema` to all rules.
 - Add `meta.docs.description` and `meta.docs.url` to all rules.
 - Migrate `RuleTester` setup from `parserOptions` to `languageOptions`.
 
 ### Compatibility
+
 - Requires ESLint `>= 9.0.0`.
 - Requires Node.js `^20.19.0 || ^22.13.0 || >=24`.
 ```
@@ -668,6 +708,7 @@ Contents:
 - [ ] **Step 2: Commit**
 
 Run:
+
 ```bash
 git add CHANGELOG.md
 git commit -m "Add CHANGELOG with v2.0.0 release notes"
@@ -678,13 +719,14 @@ git commit -m "Add CHANGELOG with v2.0.0 release notes"
 ### Task 12: Add `AGENTS.md`
 
 **Files:**
+
 - Create: `AGENTS.md`
 
 - [ ] **Step 1: Create the file**
 
 Contents:
 
-```md
+````md
 # Agent Guide — eslint-plugin-suitescript
 
 This file gives AI coding agents the context they need to work in this repo without surprises.
@@ -698,18 +740,19 @@ ESLint **flat-config plugin** that provides lint rules for NetSuite SuiteScript 
 ```sh
 npm install
 ```
+````
 
 Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and npm.
 
 ## Common commands
 
-| Command | Purpose |
-|---|---|
-| `npm test` | Run the Mocha rule-tester suite |
-| `npm run lint` | Lint the plugin source itself |
-| `npm run lint:fix` | Lint and auto-fix |
-| `npm run format` | Check Prettier formatting |
-| `npm run format:fix` | Apply Prettier formatting |
+| Command              | Purpose                                        |
+| -------------------- | ---------------------------------------------- |
+| `npm test`           | Run the Mocha rule-tester suite                |
+| `npm run lint`       | Lint the plugin source itself                  |
+| `npm run lint:fix`   | Lint and auto-fix                              |
+| `npm run format`     | Check Prettier formatting                      |
+| `npm run format:fix` | Apply Prettier formatting                      |
 | `npm run build:docs` | Regenerate `docs/rules/*.md` from `docs/src/*` |
 
 ## Layout
@@ -753,7 +796,8 @@ Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and npm.
 - Introducing TypeScript or a build step.
 - Changing the public `configs` shape.
 - Adding runtime dependencies.
-```
+
+````
 
 - [ ] **Step 2: Commit**
 
@@ -761,7 +805,7 @@ Run:
 ```bash
 git add AGENTS.md
 git commit -m "Add AGENTS.md with repo conventions for AI agents"
-```
+````
 
 ---
 
@@ -772,6 +816,7 @@ git commit -m "Add AGENTS.md with repo conventions for AI agents"
 - [ ] **Step 1: Lint**
 
 Run:
+
 ```bash
 npm run lint
 ```
@@ -781,6 +826,7 @@ Expected: clean.
 - [ ] **Step 2: Format check**
 
 Run:
+
 ```bash
 npm run format
 ```
@@ -790,6 +836,7 @@ Expected: clean.
 - [ ] **Step 3: Tests**
 
 Run:
+
 ```bash
 npm test
 ```
@@ -799,6 +846,7 @@ Expected: all tests green.
 - [ ] **Step 4: Inspect commit history**
 
 Run:
+
 ```bash
 git log --oneline master..HEAD
 ```
