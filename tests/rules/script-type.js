@@ -3,12 +3,12 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/script-type');
 
-const parserOptions = {
-  ecmaVersion: 2015,
-  sourceType: 'module',
-};
-
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({
+  languageOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module',
+  },
+});
 ruleTester.run('script-type', rule, {
   valid: [
     {

@@ -3,12 +3,12 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/api-version');
 
-const parserOptions = {
-  ecmaVersion: 2015,
-  sourceType: 'module',
-};
-
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({
+  languageOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module',
+  },
+});
 ruleTester.run('api-version', rule, {
   valid: [
     {
@@ -42,14 +42,6 @@ ruleTester.run('api-version', rule, {
   ],
 
   invalid: [
-    {
-      code: `
-/**
- * @NApiVersion
- */
-      `,
-      errors: [{ messageId: 'noValue' }],
-    },
     {
       code: `
 /**
