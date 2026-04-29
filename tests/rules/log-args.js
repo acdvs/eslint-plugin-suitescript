@@ -20,6 +20,13 @@ define([], function() {
     },
     {
       code: `
+define(["N/log", "N/extra"], function(logModule) {
+  log.debug("title", "description");
+});
+      `,
+    },
+    {
+      code: `
 define([], function() {
   log.debug({ title: "Title", details: "Message" });
 });
