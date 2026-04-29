@@ -111,6 +111,26 @@ define([], function() {
       `,
       // Should not error, since scriptType is null and rule should exit early
     },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => {
+  return { pageInit: x };
+});
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => {
+  return { pageInit: () => {} };
+});
+      `,
+    },
   ],
 
   invalid: [
@@ -190,6 +210,17 @@ define([], function() {
   var notTheReturnObject = {};
   notTheReturnObject.pageInit = x;
   return exports;
+});
+      `,
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], (record) => {
+  return { getInputData, map, reduce, summarize };
 });
       `,
       errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
