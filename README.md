@@ -12,7 +12,7 @@ NetSuite SuiteScript v1/v2 linting rules for ESLint
 npm i -D eslint eslint-plugin-suitescript
 ```
 
-Requires ESLint v9 or higher. Users on ESLint v8 (or `.eslintrc.*`) should stay on `eslint-plugin-suitescript@1`.
+Requires `eslint@>=9`. Users on `eslint@<9` (or `.eslintrc.*` configs with `eslint@^9`) should stay on `eslint-plugin-suitescript@^1`.
 
 ## Configuration
 
@@ -55,7 +55,7 @@ v2 is **flat-config only**. To migrate:
 - Replace `env: { 'suitescript/suitescript2': true }` with `...suitescript.configs.suitescript2`.
 - Bump `eslint` to `>= 9` in your project.
 
-Stay on `eslint-plugin-suitescript@1` if you cannot migrate.
+Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
 
 ## List of supported rules
 
