@@ -131,6 +131,35 @@ define([], () => {
 });
       `,
     },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => ({ pageInit: x }));
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => ({ pageInit: () => {} }));
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], function() {
+  var exports = {};
+  log.debug('init');
+  exports.pageInit = x;
+  return exports;
+});
+      `,
+    },
   ],
 
   invalid: [
@@ -222,6 +251,15 @@ define([], function() {
 define([], (record) => {
   return { getInputData, map, reduce, summarize };
 });
+      `,
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => ({ notAnEntryPoint: x }));
       `,
       errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
     },
