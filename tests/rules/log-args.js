@@ -3,17 +3,24 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/log-args');
 
-const parserOptions = {
-  ecmaVersion: 2015,
-  sourceType: 'module',
-};
-
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({
+  languageOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module',
+  },
+});
 ruleTester.run('log-args', rule, {
   valid: [
     {
       code: `
 define([], function() {
+  log.debug("title", "description");
+});
+      `,
+    },
+    {
+      code: `
+define(["N/log", "N/extra"], function(logModule) {
   log.debug("title", "description");
 });
       `,

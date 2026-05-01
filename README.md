@@ -8,38 +8,56 @@ NetSuite SuiteScript v1/v2 linting rules for ESLint
 
 ## Installation
 
-Installation per project is highly recommended:
-
 ```sh
-$ npm i -D eslint eslint-plugin-suitescript
+npm i -D eslint eslint-plugin-suitescript
 ```
+
+Requires `eslint@>=9`. Users on `eslint@<9` (or `.eslintrc.*` configs with `eslint@^9`) should stay on `eslint-plugin-suitescript@^1`.
 
 ## Configuration
 
-Add "suitescript" to the plugins section of your ESLint config file.
+Create `eslint.config.js` (or `eslint.config.mjs`) in your project root:
 
-```json
-"plugins": ["suitescript"]
+```js
+import suitescript from 'eslint-plugin-suitescript';
+
+export default [
+  ...suitescript.configs.recommended,
+  // optional: enable SuiteScript 2.x globals (`log`, `util`)
+  ...suitescript.configs.suitescript2,
+  // or 1.0 globals (`nlapi*`, `nlobj*`)
+  // ...suitescript.configs.suitescript1,
+];
 ```
 
-Enable the rules that you would like to use.
+Or wire rules manually:
 
-```json
-"rules": {
-  "suitescript/script-type": "error",
-  "suitescript/no-log-module": "error",
-}
+```js
+import suitescript from 'eslint-plugin-suitescript';
+
+export default [
+  {
+    plugins: { suitescript },
+    rules: {
+      'suitescript/script-type': 'error',
+      'suitescript/no-log-module': 'error',
+    },
+  },
+];
 ```
 
-Or use a predefined setting for quick setup (choose one).
+## Migration from v1.x
 
-```json
-// All available rules
-"extends": ["plugin:suitescript/all"]
+v2 is **flat-config only**. To migrate:
 
-// Just the recommended rules
-"extends": ["plugin:suitescript/recommended"]
-```
+- Replace `.eslintrc.*` with `eslint.config.js`.
+- Replace `extends: ['plugin:suitescript/recommended']` with `...suitescript.configs.recommended` (spread).
+- Replace `env: { 'suitescript/suitescript2': true }` with `...suitescript.configs.suitescript2`.
+- Bump `eslint` to `>= 9` in your project.
+
+`configs.recommended` already declares the AMD globals (`define`, `require`) and the standard browser globals (`window`, `document`, ...) that v1's `env: { amd: true, browser: true }` provided, so `no-undef` keeps working on `define([...], function() {})` modules and on client scripts that touch the DOM.
+
+Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
 
 ## List of supported rules
 

@@ -3,12 +3,12 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/entry-points');
 
-const parserOptions = {
-  ecmaVersion: 2015,
-  sourceType: 'module',
-};
-
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({
+  languageOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module',
+  },
+});
 ruleTester.run('entry-points', rule, {
   valid: [
     {
@@ -111,6 +111,55 @@ define([], function() {
       `,
       // Should not error, since scriptType is null and rule should exit early
     },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => {
+  return { pageInit: x };
+});
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => {
+  return { pageInit: () => {} };
+});
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => ({ pageInit: x }));
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => ({ pageInit: () => {} }));
+      `,
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], function() {
+  var exports = {};
+  log.debug('init');
+  exports.pageInit = x;
+  return exports;
+});
+      `,
+    },
   ],
 
   invalid: [
@@ -191,6 +240,26 @@ define([], function() {
   notTheReturnObject.pageInit = x;
   return exports;
 });
+      `,
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], (record) => {
+  return { getInputData, map, reduce, summarize };
+});
+      `,
+      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+    },
+    {
+      code: `
+/**
+ * @NScriptType ClientScript
+ */
+define([], () => ({ notAnEntryPoint: x }));
       `,
       errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
     },

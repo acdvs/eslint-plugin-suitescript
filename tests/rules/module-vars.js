@@ -3,12 +3,12 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../lib/rules/module-vars');
 
-const parserOptions = {
-  ecmaVersion: 2015,
-  sourceType: 'module',
-};
-
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({
+  languageOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module',
+  },
+});
 ruleTester.run('module-vars', rule, {
   valid: [
     {
@@ -31,12 +31,23 @@ ruleTester.run('module-vars', rule, {
       code: 'define(["N/file", "N/runtime"], function(f, r) {});',
       options: [{ 'N/file': 'f', 'N/runtime': 'r' }],
     },
+    {
+      code: 'define(["N/record", "N/search"], function(record) {});',
+      options: [{ 'N/record': 'record', 'N/search': 'search' }],
+    },
   ],
 
   invalid: [
     {
       code: 'define(["N/record"], function(test) {});',
       options: [{ 'N/record': 'record' }],
+      errors: [
+        { messageId: 'useCorrectName', data: { module: 'N/record', id: 'record' } },
+      ],
+    },
+    {
+      code: 'define(["N/record", "N/search"], function(wrongName) {});',
+      options: [{ 'N/record': 'record', 'N/search': 'search' }],
       errors: [
         { messageId: 'useCorrectName', data: { module: 'N/record', id: 'record' } },
       ],
