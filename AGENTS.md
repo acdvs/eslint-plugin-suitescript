@@ -9,21 +9,21 @@ ESLint **flat-config plugin** that provides lint rules for NetSuite SuiteScript 
 ## Setup
 
 ```sh
-npm install
+yarn install
 ```
 
-Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and npm.
+Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and Yarn Classic (1.x). The repo ships a `yarn.lock` — do not introduce `package-lock.json`.
 
 ## Common commands
 
-| Command              | Purpose                                        |
-| -------------------- | ---------------------------------------------- |
-| `npm test`           | Run the Mocha rule-tester suite                |
-| `npm run lint`       | Lint the plugin source itself                  |
-| `npm run lint:fix`   | Lint and auto-fix                              |
-| `npm run format`     | Check Prettier formatting                      |
-| `npm run format:fix` | Apply Prettier formatting                      |
-| `npm run build:docs` | Regenerate `docs/rules/*.md` from `docs/src/*` |
+| Command               | Purpose                                        |
+| --------------------- | ---------------------------------------------- |
+| `yarn test`           | Run the Mocha rule-tester suite                |
+| `yarn lint`           | Lint the plugin source itself                  |
+| `yarn lint:fix`       | Lint and auto-fix                              |
+| `yarn format`         | Check Prettier formatting                      |
+| `yarn format:fix`     | Apply Prettier formatting                      |
+| `yarn build:docs`     | Regenerate `docs/rules/*.md` from `docs/src/*` |
 
 ## Layout
 
@@ -32,7 +32,7 @@ Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and npm.
 - `lib/util/` — shared helpers (`metadata`, `modules`, `script-types`, `globals`, …)
 - `tests/rules/` — one Mocha test file per rule, using ESLint `RuleTester`
 - `docs/src/` — doc templates (with `<TOKEN>` placeholders consumed by `scripts/generate_docs.js`)
-- `docs/rules/` — generated rule docs (output of `npm run build:docs`)
+- `docs/rules/` — generated rule docs (output of `yarn build:docs`)
 
 ## Rule-authoring conventions
 
@@ -52,7 +52,7 @@ Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and npm.
 2. Register it in `lib/index.js` (the `allRules` map and the relevant configs).
 3. Add `tests/rules/<rule>.js` with `valid` and `invalid` cases.
 4. Add a doc template in `docs/src/<rule>.md`.
-5. Run `npm run build:docs` to regenerate `docs/rules/<rule>.md`.
+5. Run `yarn build:docs` to regenerate `docs/rules/<rule>.md`.
 6. Add the rule to the list in `README.md`.
 
 ## Commit conventions
