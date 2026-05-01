@@ -16,14 +16,14 @@ Requires Node.js `^20.19.0 || ^22.13.0 || >=24` and Yarn Classic (1.x). The repo
 
 ## Common commands
 
-| Command               | Purpose                                        |
-| --------------------- | ---------------------------------------------- |
-| `yarn test`           | Run the Mocha rule-tester suite                |
-| `yarn lint`           | Lint the plugin source itself                  |
-| `yarn lint:fix`       | Lint and auto-fix                              |
-| `yarn format`         | Check Prettier formatting                      |
-| `yarn format:fix`     | Apply Prettier formatting                      |
-| `yarn build:docs`     | Regenerate `docs/rules/*.md` from `docs/src/*` |
+| Command           | Purpose                                        |
+| ----------------- | ---------------------------------------------- |
+| `yarn test`       | Run the Mocha rule-tester suite                |
+| `yarn lint`       | Lint the plugin source itself                  |
+| `yarn lint:fix`   | Lint and auto-fix                              |
+| `yarn format`     | Check Prettier formatting                      |
+| `yarn format:fix` | Apply Prettier formatting                      |
+| `yarn build:docs` | Regenerate `docs/rules/*.md` from `docs/src/*` |
 
 ## Layout
 
