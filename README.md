@@ -55,6 +55,8 @@ v2 is **flat-config only**. To migrate:
 - Replace `env: { 'suitescript/suitescript2': true }` with `...suitescript.configs.suitescript2`.
 - Bump `eslint` to `>= 9` in your project.
 
+`configs.recommended` already declares the AMD globals (`define`, `require`) and the standard browser globals (`window`, `document`, ...) that v1's `env: { amd: true, browser: true }` provided, so `no-undef` keeps working on `define([...], function() {})` modules and on client scripts that touch the DOM.
+
 Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
 
 ## List of supported rules
