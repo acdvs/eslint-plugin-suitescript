@@ -1,14 +1,6 @@
-'use strict';
+import rule from '../../lib/rules/api-version';
+import ruleTester from '../rule-tester';
 
-const RuleTester = require('eslint').RuleTester;
-const rule = require('../../lib/rules/api-version');
-
-const ruleTester = new RuleTester({
-  languageOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module',
-  },
-});
 ruleTester.run('api-version', rule, {
   valid: [
     {

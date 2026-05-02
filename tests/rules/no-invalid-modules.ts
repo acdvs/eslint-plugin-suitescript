@@ -1,14 +1,6 @@
-'use strict';
+import rule from '../../lib/rules/no-invalid-modules';
+import ruleTester from '../rule-tester';
 
-const RuleTester = require('eslint').RuleTester;
-const rule = require('../../lib/rules/no-invalid-modules');
-
-const ruleTester = new RuleTester({
-  languageOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module',
-  },
-});
 ruleTester.run('no-invalid-modules', rule, {
   valid: [
     {

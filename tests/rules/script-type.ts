@@ -1,14 +1,6 @@
-'use strict';
+import rule from '../../lib/rules/script-type';
+import ruleTester from '../rule-tester';
 
-const RuleTester = require('eslint').RuleTester;
-const rule = require('../../lib/rules/script-type');
-
-const ruleTester = new RuleTester({
-  languageOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module',
-  },
-});
 ruleTester.run('script-type', rule, {
   valid: [
     {
@@ -155,7 +147,9 @@ ruleTester.run('script-type', rule, {
  * @NScriptType SuiteletScript
  */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
+      errors: [
+        { messageId: 'invalidValue', data: { value: 'SuiteletScript' } },
+      ],
     },
     {
       code: `
@@ -166,7 +160,9 @@ ruleTester.run('script-type', rule, {
  * @NScriptType Suitelet
  */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
+      errors: [
+        { messageId: 'invalidValue', data: { value: 'SuiteletScript' } },
+      ],
     },
   ],
 });

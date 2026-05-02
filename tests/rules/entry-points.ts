@@ -1,14 +1,6 @@
-'use strict';
+import rule from '../../lib/rules/entry-points';
+import ruleTester from '../rule-tester';
 
-const RuleTester = require('eslint').RuleTester;
-const rule = require('../../lib/rules/entry-points');
-
-const ruleTester = new RuleTester({
-  languageOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module',
-  },
-});
 ruleTester.run('entry-points', rule, {
   valid: [
     {
@@ -227,7 +219,9 @@ define([], function() {
   return exports;
 });
       `,
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+      errors: [
+        { messageId: 'returnEntryPoint', data: { type: 'ClientScript' } },
+      ],
     },
     {
       code: `
@@ -241,7 +235,9 @@ define([], function() {
   return exports;
 });
       `,
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+      errors: [
+        { messageId: 'returnEntryPoint', data: { type: 'ClientScript' } },
+      ],
     },
     {
       code: `
@@ -252,7 +248,9 @@ define([], (record) => {
   return { getInputData, map, reduce, summarize };
 });
       `,
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+      errors: [
+        { messageId: 'returnEntryPoint', data: { type: 'ClientScript' } },
+      ],
     },
     {
       code: `
@@ -261,7 +259,9 @@ define([], (record) => {
  */
 define([], () => ({ notAnEntryPoint: x }));
       `,
-      errors: [{ messageId: 'returnEntryPoint', data: { type: 'ClientScript' } }],
+      errors: [
+        { messageId: 'returnEntryPoint', data: { type: 'ClientScript' } },
+      ],
     },
   ],
 });

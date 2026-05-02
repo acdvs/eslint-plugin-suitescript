@@ -1,14 +1,6 @@
-'use strict';
+import rule from '../../lib/rules/no-log-module';
+import ruleTester from '../rule-tester';
 
-const RuleTester = require('eslint').RuleTester;
-const rule = require('../../lib/rules/no-log-module');
-
-const ruleTester = new RuleTester({
-  languageOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module',
-  },
-});
 ruleTester.run('no-log-module', rule, {
   valid: [
     {

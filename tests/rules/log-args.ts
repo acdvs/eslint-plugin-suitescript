@@ -1,14 +1,6 @@
-'use strict';
+import rule from '../../lib/rules/log-args';
+import ruleTester from '../rule-tester';
 
-const RuleTester = require('eslint').RuleTester;
-const rule = require('../../lib/rules/log-args');
-
-const ruleTester = new RuleTester({
-  languageOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module',
-  },
-});
 ruleTester.run('log-args', rule, {
   valid: [
     {
