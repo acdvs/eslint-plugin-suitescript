@@ -2,6 +2,60 @@
 # yarn lockfile v1
 
 
+"@biomejs/biome@^2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/biome/-/biome-2.4.14.tgz#3d29f06baa789dce37169e5c537d6e6648361635"
+  integrity sha512-TmAvxOEgrpLypzVGJ8FulIZnlyA9TxrO1hyqYrCz9r+bwma9xXxuLA5IuYnj55XQneFx460KjRbx6SWGLkg3bQ==
+  optionalDependencies:
+    "@biomejs/cli-darwin-arm64" "2.4.14"
+    "@biomejs/cli-darwin-x64" "2.4.14"
+    "@biomejs/cli-linux-arm64" "2.4.14"
+    "@biomejs/cli-linux-arm64-musl" "2.4.14"
+    "@biomejs/cli-linux-x64" "2.4.14"
+    "@biomejs/cli-linux-x64-musl" "2.4.14"
+    "@biomejs/cli-win32-arm64" "2.4.14"
+    "@biomejs/cli-win32-x64" "2.4.14"
+
+"@biomejs/cli-darwin-arm64@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-darwin-arm64/-/cli-darwin-arm64-2.4.14.tgz#b026f36d3f6add2e712928f65e70b030abb62ef6"
+  integrity sha512-XvgoE9XOawUOQPdmvs4J7wPhi/DLwSCGks3AlPJDmh34O0awRTqCED1HRcRDdpf1Zrp4us4MGOOdIxNpbqNF5Q==
+
+"@biomejs/cli-darwin-x64@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-darwin-x64/-/cli-darwin-x64-2.4.14.tgz#bc4e2166ecc143641781e7093def0079fb870c86"
+  integrity sha512-jE7hKBCFhOx3uUh+ZkWBfOHxAcILPfhFplNkuID/eZeSTLHzfZzoZxW8fbqY9xXRnPi7jGNAf1iPVR+0yWsM/Q==
+
+"@biomejs/cli-linux-arm64-musl@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-arm64-musl/-/cli-linux-arm64-musl-2.4.14.tgz#f2b5a52482b98c6bfe1399d0c4c001873740ccee"
+  integrity sha512-/z+6gqAqqUQTHazwStxSXKHg9b8UvqBmDFRp+c4wYbq2KXhELQDon9EoC9RpmQ8JWkqQx/lIUy/cs+MhzDZp6A==
+
+"@biomejs/cli-linux-arm64@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-arm64/-/cli-linux-arm64-2.4.14.tgz#86c5195e69139eafbbabb9a285bcda9b737f3632"
+  integrity sha512-2TELhZnW5RSLL063l9rc5xLpA0ZIw0Ccwy/0q384rvNAgFw3yI76bd59547yxowdQr5MNPET/xDLrLuvgSeeWQ==
+
+"@biomejs/cli-linux-x64-musl@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-x64-musl/-/cli-linux-x64-musl-2.4.14.tgz#0abae51ba32c6fdc9c8e273bc406245f660fc49f"
+  integrity sha512-R6BWgJdQOwW9ulJatuTVrQkjnODjqHZkKNOqb1sz++3Noe5LYd0i3PchnOBUCYAPHoPWHhjJqbdZlHEu0hpjdA==
+
+"@biomejs/cli-linux-x64@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-x64/-/cli-linux-x64-2.4.14.tgz#31204057d50b0218b3f54614c7521f5530f0901c"
+  integrity sha512-zHrlQZDBDUz4OLAraYpWKcnLS6HOewBFWYOzY91d1ZjdqZwibOyb6BEu6WuWLugyo0P3riCmsbV9UqV1cSXwQg==
+
+"@biomejs/cli-win32-arm64@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-arm64/-/cli-win32-arm64-2.4.14.tgz#1df473fa218e9c191b1de671daf45d739688af96"
+  integrity sha512-M3EH5hqOI/F/FUA2u4xcLoUgmxd218mvuj/6JL7Hv2toQvr2/AdOvKSpGkoRuWFCtQPVa+ZqkEV3Q5xBA9+XSA==
+
+"@biomejs/cli-win32-x64@2.4.14":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-x64/-/cli-win32-x64-2.4.14.tgz#65d585b378f79aba1cddb1817d2c64880815639c"
+  integrity sha512-WL0EG5qE+EAKomGXbf2g6VnSKJhTL3tXC0QRzWRwA5VpjxNYa6H4P7ZWfymbGE4IhZZQi1KXQ2R0YjwInmz2fA==
+
 "@eslint-community/eslint-utils@^4.8.0":
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.9.1.tgz#4e90af67bc51ddee6cdef5284edf572ec376b595"
@@ -285,11 +339,6 @@ escape-string-regexp@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
-
-eslint-config-prettier@^10.1.5:
-  version "10.1.5"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-10.1.5.tgz#00c18d7225043b6fbce6a665697377998d453782"
-  integrity sha512-zc1UmCpNltmVY34vuLRV61r1K27sWuX39E+uyUnY8xS2Bex88VV9cugG+UZbRSRGtGyFboj+D8JODyme1plMpw==
 
 eslint-scope@^9.1.2:
   version "9.1.2"
@@ -703,11 +752,6 @@ prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
-
-prettier@^3.5.3:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.5.3.tgz#4fc2ce0d657e7a02e602549f053b239cb7dfe1b5"
-  integrity sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==
 
 punycode@^2.1.0:
   version "2.3.0"

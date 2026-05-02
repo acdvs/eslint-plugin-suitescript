@@ -13,9 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
       - run: |
           yarn
-          yarn prettier . --debug-check
-      - run: |
-          yarn lint
+          yarn check
 
   test:
     name: Test rules
