@@ -12,8 +12,10 @@
   "bugs": "https://github.com/acdvs/eslint-plugin-suitescript/issues",
   "main": "lib/index.js",
   "scripts": {
-    "build:docs": "node scripts/generate_docs.js",
+    "build": "tsc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
+    "build:docs": "tsx scripts/generate-docs.ts",
     "check": "biome check",
+    "check:types": "tsc -p tsconfig.dev.json",
     "test": "mocha tests/** --recursive --reporter min"
   },
   "files": [
@@ -36,7 +38,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.14",
     "eslint": "^10.0.0",
-    "mocha": "^11.4.0"
+    "mocha": "^11.4.0",
+    "tsc-alias": "^1.8.17",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "eslint": ">=9.0.0"
