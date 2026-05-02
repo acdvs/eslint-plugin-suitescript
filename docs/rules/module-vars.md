@@ -71,7 +71,9 @@ Specify at least one module name with a corresponding variable name.
 - N/https
 - N/https/clientCertificate
 - N/keyControl
+- N/llm
 - N/log
+- N/pgp
 - N/piremoval
 - N/plugin
 - N/portlet
