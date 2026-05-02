@@ -4,12 +4,12 @@
     "allowJs": true,
     "exactOptionalPropertyTypes": true,
     "isolatedModules": true,
-    "module": "commonjs",
+    "module": "nodenext",
     "moduleDetection": "force",
+    "moduleResolution": "nodenext",
     "noUncheckedSideEffectImports": true,
     "outDir": "dist",
     "target": "es2020",
-    "types": [],
     "skipLibCheck": true,
     "strict": true
   }
