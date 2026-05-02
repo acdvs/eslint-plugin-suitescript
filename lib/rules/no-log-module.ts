@@ -1,13 +1,14 @@
-'use strict';
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
+import { getScriptType } from '../util/metadata';
+import { getModuleNodePair } from '../util/modules';
 
-const moduleUtil = require('../util/modules');
-const metadataUtil = require('../util/metadata');
-
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Restrict loading of the N/log module in favor of global log',
+      description:
+        'Restrict loading of the N/log module in favor of global log',
       url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/no-log-module.md',
     },
     messages: {
@@ -25,13 +26,12 @@ module.exports = {
       },
     ],
   },
-
   create: (context) => ({
-    'CallExpression[callee.name=define]': (node) => {
+    'CallExpression[callee.name=define]': (node: CallExpression) => {
       const config = context.options[0] || { allowInClientScripts: true };
 
-      const logModule = moduleUtil.getModuleNodePair(node, 'N/log');
-      const scriptType = metadataUtil.getScriptType(context);
+      const logModule = getModuleNodePair(node, 'N/log');
+      const scriptType = getScriptType(context);
       const isClientScript = scriptType && scriptType.value === 'ClientScript';
 
       if (isClientScript && config.allowInClientScripts) {
@@ -47,3 +47,5 @@ module.exports = {
     },
   }),
 };
+
+export default rule;

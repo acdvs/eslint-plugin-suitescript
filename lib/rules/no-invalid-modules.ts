@@ -1,8 +1,8 @@
-'use strict';
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
+import { getModules } from '../util/modules';
 
-const moduleUtil = require('../util/modules');
-
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
@@ -14,13 +14,12 @@ module.exports = {
       invalidModule: "Invalid NetSuite module '{{ module }}'",
     },
   },
-
   create: (context) => {
     let invalidModuleNodes = [];
 
     return {
-      'CallExpression[callee.name=define]': (node) => {
-        const modules = moduleUtil.getModules(node).list;
+      'CallExpression[callee.name=define]': (node: CallExpression) => {
+        const modules = getModules(node).list;
         invalidModuleNodes = modules
           .filter((m) => !m.isValid && m.nodes.name)
           .map((m) => m.nodes.name);
@@ -38,3 +37,5 @@ module.exports = {
     };
   },
 };
+
+export default rule;

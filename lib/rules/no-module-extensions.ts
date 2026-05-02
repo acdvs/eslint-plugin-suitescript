@@ -1,10 +1,10 @@
-'use strict';
-
-const moduleUtil = require('../util/modules');
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
+import { getModules } from '../util/modules';
 
 const INVALID_MODULE_REGEX = /\.js/;
 
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
@@ -17,13 +17,12 @@ module.exports = {
     },
     fixable: 'code',
   },
-
   create: (context) => {
     let invalidModuleNodes = [];
 
     return {
-      'CallExpression[callee.name=define]': (node) => {
-        const modules = moduleUtil.getModules(node).list;
+      'CallExpression[callee.name=define]': (node: CallExpression) => {
+        const modules = getModules(node).list;
 
         invalidModuleNodes = modules
           .filter((m) => INVALID_MODULE_REGEX.test(m.name))
@@ -33,10 +32,10 @@ module.exports = {
           context.report({
             node: invalidModuleNode,
             messageId: 'invalidModuleExtension',
-            fix: function (fixer) {
+            fix: (fixer) => {
               const fixedModuleName = invalidModuleNode.raw.replace(
                 INVALID_MODULE_REGEX,
-                ''
+                '',
               );
               return fixer.replaceText(invalidModuleNode, fixedModuleName);
             },
@@ -46,3 +45,5 @@ module.exports = {
     };
   },
 };
+
+export default rule;

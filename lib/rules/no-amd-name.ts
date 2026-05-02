@@ -1,6 +1,7 @@
-'use strict';
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
 
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -13,9 +14,8 @@ module.exports = {
     },
     fixable: 'code',
   },
-
   create: (context) => ({
-    'CallExpression[callee.name=define]': (node) => {
+    'CallExpression[callee.name=define]': (node: CallExpression) => {
       if (node.arguments.length !== 3) {
         return;
       }
@@ -27,11 +27,12 @@ module.exports = {
         context.report({
           node: arg1,
           messageId: 'noModuleName',
-          fix: function (fixer) {
-            return fixer.replaceTextRange([arg1.range[0], arg2.range[0]], '');
-          },
+          fix: (fixer) =>
+            fixer.replaceTextRange([arg1.range[0], arg2.range[0]], ''),
         });
       }
     },
   }),
 };
+
+export default rule;

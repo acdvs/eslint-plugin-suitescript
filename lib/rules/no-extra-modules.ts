@@ -1,8 +1,8 @@
-'use strict';
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
+import { getModules } from '../util/modules';
 
-const moduleUtil = require('../util/modules');
-
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
@@ -15,10 +15,9 @@ module.exports = {
       excessVar: "Excess module identifier '{{ var }}'",
     },
   },
-
   create: (context) => ({
-    'CallExpression[callee.name=define]': (node) => {
-      const modules = moduleUtil.getModules(node);
+    'CallExpression[callee.name=define]': (node: CallExpression) => {
+      const modules = getModules(node);
       const nameCount = modules.nameCount;
       const varCount = modules.varCount;
 
@@ -50,3 +49,5 @@ module.exports = {
     },
   }),
 };
+
+export default rule;

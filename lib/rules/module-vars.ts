@@ -1,13 +1,13 @@
-'use strict';
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
+import { getModules, moduleNames } from '../util/modules';
 
-const moduleUtil = require('../util/modules');
-const { moduleNames } = require('../util/modules');
-
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Enforce correct module identifiers for each configured module',
+      description:
+        'Enforce correct module identifiers for each configured module',
       url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/module-vars.md',
     },
     messages: {
@@ -21,13 +21,12 @@ module.exports = {
       },
     ],
   },
-
   create: (context) => ({
-    'CallExpression[callee.name=define]': (node) => {
+    'CallExpression[callee.name=define]': (node: CallExpression) => {
       if (!context.options[0]) return;
 
       const config = context.options[0];
-      const modules = moduleUtil.getModules(node);
+      const modules = getModules(node);
 
       if (modules.varCount === 0) return;
 
@@ -56,7 +55,7 @@ module.exports = {
  * @returns {Object}
  */
 function getSchemaProperties() {
-  let properties = moduleNames.map((name) => {
+  const properties = moduleNames.map((name) => {
     return {
       [name]: {
         type: 'string',
@@ -66,3 +65,5 @@ function getSchemaProperties() {
 
   return Object.assign({}, ...properties);
 }
+
+export default rule;

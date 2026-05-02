@@ -1,12 +1,13 @@
-'use strict';
+import type { Rule } from 'eslint';
+import type { CallExpression } from 'estree';
+import { getScriptType } from '../util/metadata';
 
-const { getScriptType } = require('../util/metadata');
-
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
-      description: 'Enforce inclusion of at least one entry point based on @NScriptType',
+      description:
+        'Enforce inclusion of at least one entry point based on @NScriptType',
       url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/entry-points.md',
     },
     schema: [],
@@ -14,13 +15,12 @@ module.exports = {
       returnEntryPoint: 'Return at least one valid {{ type }} entry point',
     },
   },
-
   create: (context) => ({
-    'CallExpression[callee.name=define]': (node) => {
+    'CallExpression[callee.name=define]': (node: CallExpression) => {
       let hasValidEntryPoint = false;
-      let scriptType = getScriptType(context);
+      const scriptType = getScriptType(context);
 
-      if (!scriptType || !scriptType.value || !scriptType.def) {
+      if (!scriptType?.value || !scriptType.def) {
         return;
       }
 
@@ -40,10 +40,10 @@ module.exports = {
       const returnStatement =
         hasBlockBody && callbackBody.find((n) => n.type === 'ReturnStatement');
       const returnArgument = hasBlockBody
-        ? returnStatement && returnStatement.argument
+        ? returnStatement?.argument
         : callback.body;
 
-      if (returnArgument && returnArgument.type === 'ObjectExpression') {
+      if (returnArgument?.type === 'ObjectExpression') {
         for (const property of returnArgument.properties) {
           if (
             scriptType.def.entryPoints.includes(property.key.name) &&
@@ -64,7 +64,9 @@ module.exports = {
             n.expression.type === 'AssignmentExpression' &&
             n.expression.left.type === 'MemberExpression' &&
             n.expression.left.object.name === returnArgument.name &&
-            scriptType.def.entryPoints.includes(n.expression.left.property.name)
+            scriptType.def.entryPoints.includes(
+              n.expression.left.property.name,
+            ),
         );
 
         if (returnAssignments.length > 0) {
@@ -88,3 +90,5 @@ module.exports = {
     },
   }),
 };
+
+export default rule;

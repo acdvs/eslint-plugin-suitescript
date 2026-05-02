@@ -1,8 +1,7 @@
-'use strict';
+import type { Rule } from 'eslint';
+import { getScriptType } from '../util/metadata';
 
-const { getScriptType } = require('../util/metadata');
-
-module.exports = {
+const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
@@ -15,7 +14,6 @@ module.exports = {
       noValue: 'No @NScriptType value provided',
     },
   },
-
   create: (context) => ({
     Program: () => {
       const scriptType = getScriptType(context);
@@ -39,3 +37,5 @@ module.exports = {
     },
   }),
 };
+
+export default rule;
