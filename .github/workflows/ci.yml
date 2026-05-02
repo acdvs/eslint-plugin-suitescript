@@ -6,21 +6,34 @@ on:
 
 jobs:
   lint:
-    name: Check linting and formatting
+    name: Check linting, formatting, types
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
       - run: |
-          yarn
-          yarn check
+          pnpm install
+          pnpm check
+          pnpm check:types
 
   test:
     name: Test rules
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
       - run: |
-          yarn
-          yarn test
+          pnpm install
+          pnpm test
