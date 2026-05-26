@@ -67,7 +67,6 @@ Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
 - [suitescript/module-vars](docs/rules/module-vars.md): Enforces correct module identifiers for each configured module
 - [suitescript/no-invalid-modules](docs/rules/no-invalid-modules.md): Enforces valid SuiteScript modules in `define` array
 - [suitescript/no-log-module](docs/rules/no-log-module.md): Restricts loading of the N/log module in favor of global `log`
-- [suitescript/no-module-extensions](docs/rules/no-module-extensions.md): Restricts filename extensions on module dependencies
 - [suitescript/script-type](docs/rules/script-type.md): Enforces valid `@NScriptType` tag values
 
 ## License

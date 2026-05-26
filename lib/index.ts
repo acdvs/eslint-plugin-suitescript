@@ -13,7 +13,6 @@ const plugin: ESLint.Plugin = {
     'module-vars': require('./rules/module-vars'),
     'no-invalid-modules': require('./rules/no-invalid-modules'),
     'no-log-module': require('./rules/no-log-module'),
-    'no-module-extensions': require('./rules/no-module-extensions'),
     'script-type': require('./rules/script-type'),
   },
 };
@@ -37,7 +36,6 @@ plugin.configs = {
         'suitescript/module-vars': ['error', MODULES],
         'suitescript/no-invalid-modules': 'error',
         'suitescript/no-log-module': 'error',
-        'suitescript/no-module-extensions': 'error',
         'suitescript/script-type': 'error',
       },
     },
