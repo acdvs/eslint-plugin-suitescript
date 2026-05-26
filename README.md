@@ -65,7 +65,6 @@ Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
 - [suitescript/entry-points](docs/rules/entry-points.md): Enforces inclusion of at least one entry point based on `@NScriptType`
 - [suitescript/log-args](docs/rules/log-args.md): Enforces correct log arguments
 - [suitescript/module-vars](docs/rules/module-vars.md): Enforces correct module identifiers for each configured module
-- [suitescript/no-extra-modules](docs/rules/no-extra-modules.md): Enforces equal number of module literals and identifiers
 - [suitescript/no-invalid-modules](docs/rules/no-invalid-modules.md): Enforces valid SuiteScript modules in `define` array
 - [suitescript/no-log-module](docs/rules/no-log-module.md): Restricts loading of the N/log module in favor of global `log`
 - [suitescript/no-module-extensions](docs/rules/no-module-extensions.md): Restricts filename extensions on module dependencies
