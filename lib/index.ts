@@ -1,11 +1,10 @@
-'use strict';
+import type { ESLint } from 'eslint';
+import envGlobals from 'globals';
+import pkg from '../package.json';
+import globals from './utils/globals';
+import { MODULES } from './utils/modules';
 
-const envGlobals = require('globals');
-const { MODULES } = require('./util/modules');
-const globals = require('./util/globals');
-const pkg = require('../package.json');
-
-const plugin = {
+const plugin: ESLint.Plugin = {
   meta: { name: pkg.name, version: pkg.version },
   rules: {
     'api-version': require('./rules/api-version'),
@@ -53,4 +52,4 @@ plugin.configs = {
 
 plugin.configs.all = plugin.configs.recommended;
 
-module.exports = plugin;
+export default plugin;
