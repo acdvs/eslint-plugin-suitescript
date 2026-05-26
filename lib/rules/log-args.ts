@@ -1,6 +1,5 @@
 import type { Rule } from 'eslint';
-import { getModuleNodePair } from '../util/modules';
-import { getPropByKey } from '../util/objects';
+import { getPropByKey } from '../utils/objects';
 
 const LOG_MEMBERS = ['debug', 'audit', 'error', 'emergency'];
 

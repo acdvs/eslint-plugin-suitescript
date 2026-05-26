@@ -1,26 +1,24 @@
-'use strict';
-
-const { getScriptTypeDef } = require('./script-types');
+import type { Rule } from 'eslint';
+import { getScriptTypeDef } from './script-types';
 
 const SCRIPT_TAG = '@NScriptType';
 const SCRIPT_TAG_REGEX = /@NScriptType(?: (\S+))?/;
 
-/**
- * Gets "@NScriptType" value and metadata
- * @param {Object} context Execution context
- * @returns {(Object|null)}
- */
-function getScriptType(context) {
+function getScriptType(context: Rule.RuleContext) {
   const sourceCode = context.sourceCode;
   const comment = sourceCode
     .getAllComments()
     .find((node) => SCRIPT_TAG_REGEX.test(node.value));
 
-  if (!comment || comment.type !== 'Block') {
-    return null;
+  if (!comment?.loc || comment.type !== 'Block') {
+    return;
   }
 
-  const scriptType = comment.value.match(SCRIPT_TAG_REGEX)[1];
+  const scriptType = comment.value.match(SCRIPT_TAG_REGEX)?.[1];
+
+  if (!scriptType) {
+    return;
+  }
 
   const commentIndex = sourceCode.getIndexFromLoc(comment.loc.start) + 1;
   const tagIndex = commentIndex + comment.value.indexOf(SCRIPT_TAG) + 1;
@@ -42,6 +40,4 @@ function getScriptType(context) {
   };
 }
 
-module.exports = {
-  getScriptType,
-};
+export { getScriptType };

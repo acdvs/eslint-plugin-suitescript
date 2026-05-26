@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { moduleNames } from '../lib/util/modules';
-import { scriptTypes } from '../lib/util/script-types';
+import { moduleNames } from '../lib/utils/modules';
+import { scriptTypes } from '../lib/utils/script-types';
 
 const SRC_DIR = './docs/src';
 const OUT_DIR = './docs/rules';

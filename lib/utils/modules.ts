@@ -1,4 +1,15 @@
-'use strict';
+import type { JSSyntaxElement } from 'eslint';
+import type { CallExpression } from 'estree';
+
+type Module = {
+  name: string;
+  variable: string;
+  nodes: {
+    name: JSSyntaxElement | null;
+    variable: JSSyntaxElement | null;
+  };
+  isValid: boolean;
+};
 
 const N_MODULE_REGEX = /^N\//;
 const MODULES = {
@@ -59,22 +70,14 @@ const MODULES = {
 
 const moduleNames = Object.keys(MODULES);
 
-/**
- * Maps the define callback params to the module array
- * Includes module names that don't have assigned callback params
- * @param {ASTNode} defineCallNode Root define call node
- * @returns {Object}
- */
-function getModules(defineCallNode) {
-  let modules = {
-    list: [],
-    nameCount: 0,
-    varCount: 0,
-  };
+function getModules(defineCallNode: CallExpression) {
+  const modules: Module[] = [];
+
+  let nameCount = 0;
+  let varCount = 0;
 
   if (
-    defineCallNode &&
-    defineCallNode.type === 'CallExpression' &&
+    defineCallNode?.type === 'CallExpression' &&
     defineCallNode.callee.name === 'define'
   ) {
     const argCount = defineCallNode.arguments.length;
@@ -94,17 +97,17 @@ function getModules(defineCallNode) {
       return modules;
     }
 
-    modules.nameCount = moduleList.elements.length;
-    modules.varCount = callback.params.length;
+    nameCount = moduleList.elements.length;
+    varCount = callback.params.length;
 
     const longerList =
-      modules.nameCount > modules.varCount ? moduleList.elements : callback.params;
+      nameCount > varCount ? moduleList.elements : callback.params;
 
     for (let i = 0; i < longerList.length; i++) {
       const nameNode = moduleList.elements[i];
       const varNode = callback.params[i];
 
-      modules.list.push({
+      modules.push({
         name: nameNode ? nameNode.value : null,
         variable: varNode ? varNode.name : null,
         nodes: {
@@ -113,7 +116,8 @@ function getModules(defineCallNode) {
         },
         isValid:
           !!nameNode &&
-          (moduleNames.includes(nameNode.value) || !N_MODULE_REGEX.test(nameNode.value)),
+          (moduleNames.includes(nameNode.value) ||
+            !N_MODULE_REGEX.test(nameNode.value)),
       });
     }
   }
@@ -121,48 +125,32 @@ function getModules(defineCallNode) {
   return modules;
 }
 
-/**
- * Gets the literal string names of all modules
- * @param {ASTNode} defineCallNode Root define call node
- * @returns {Array}
- */
-function getModuleNames(defineCallNode) {
-  const modules = getModules(defineCallNode).list;
+function getModuleNames(defineCallNode: CallExpression) {
+  const modules = getModules(defineCallNode);
   const moduleNames = modules.map((module) => module.name);
 
   return moduleNames;
 }
 
-/**
- * Gets the variable names of all modules
- * @param {ASTNode} defineCallNode Root define call node
- * @returns {Array}
- */
-function getModuleVars(defineCallNode) {
-  const modules = getModules(defineCallNode).list;
+function getModuleVars(defineCallNode: CallExpression) {
+  const modules = getModules(defineCallNode);
   const moduleVars = modules.map((module) => module.variable);
 
   return moduleVars;
 }
 
-/**
- * Gets the name and variable nodes of a module by name
- * @param {ASTNode} defineCallNode Root define call node
- * @param {string} moduleName Module name in N/ format
- * @returns {(Object|boolean)}
- */
-function getModuleNodePair(defineCallNode, moduleName) {
-  const modules = getModules(defineCallNode).list;
+function getModuleNodePair(defineCallNode: CallExpression, moduleName: string) {
+  const modules = getModules(defineCallNode);
   const targetModule = modules.find((m) => m.name === moduleName);
 
-  return targetModule && targetModule.nodes;
+  return targetModule?.nodes;
 }
 
-module.exports = {
+export {
+  getModuleNames,
+  getModuleNodePair,
+  getModules,
+  getModuleVars,
   MODULES,
   moduleNames,
-  getModules,
-  getModuleNames,
-  getModuleVars,
-  getModuleNodePair,
 };

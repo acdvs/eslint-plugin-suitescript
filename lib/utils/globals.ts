@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export default {
   suitescript2: {
     log: 'readonly',
     util: 'readonly',

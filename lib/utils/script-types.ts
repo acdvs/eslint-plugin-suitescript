@@ -1,5 +1,3 @@
-'use strict';
-
 const scriptTypes = [
   {
     name: 'BankConnectivityPlugin',
@@ -39,7 +37,11 @@ const scriptTypes = [
   { name: 'DatasetBuilderPlugin', entryPoints: ['createDataset'] },
   {
     name: 'FiConnectivityPlugin',
-    entryPoints: ['getConfigurationIFrameUrl', 'getAccounts', 'getTransactionData'],
+    entryPoints: [
+      'getConfigurationIFrameUrl',
+      'getAccounts',
+      'getTransactionData',
+    ],
   },
   {
     name: 'FiParserPlugin',
@@ -78,7 +80,7 @@ const scriptTypes = [
   },
 ];
 
-function getScriptTypeDef(scriptType) {
+function getScriptTypeDef(scriptType: string) {
   return (
     !!scriptType &&
     scriptTypes.find((x) => x.name.toLowerCase() === scriptType.toLowerCase())

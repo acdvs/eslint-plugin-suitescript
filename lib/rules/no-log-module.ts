@@ -1,7 +1,7 @@
 import type { Rule } from 'eslint';
 import type { CallExpression } from 'estree';
-import { getScriptType } from '../util/metadata';
-import { getModuleNodePair } from '../util/modules';
+import { getScriptType } from '../utils/metadata';
+import { getModuleNodePair } from '../utils/modules';
 
 const rule: Rule.RuleModule = {
   meta: {
