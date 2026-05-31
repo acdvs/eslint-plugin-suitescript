@@ -48,6 +48,7 @@
     "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "dependencies": {
+    "@acdvs/eslint-plugin-amd": "^1.0.0",
     "globals": "^17.6.0"
   },
   "devDependencies": {

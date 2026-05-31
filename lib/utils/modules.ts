@@ -1,13 +1,13 @@
-import type { JSSyntaxElement } from 'eslint';
-import type { CallExpression } from 'estree';
+import type { CallExpression, Identifier, Literal } from 'estree';
 
+export type ModuleNodes = {
+  name: Literal | null;
+  variable: Identifier | null;
+};
 type Module = {
-  name: string;
-  variable: string;
-  nodes: {
-    name: JSSyntaxElement | null;
-    variable: JSSyntaxElement | null;
-  };
+  name: string | null;
+  variable: string | null;
+  nodes: ModuleNodes;
   isValid: boolean;
 };
 
@@ -70,20 +70,23 @@ const MODULES = {
 
 const moduleNames = Object.keys(MODULES);
 
-function getModules(defineCallNode: CallExpression) {
-  const modules: Module[] = [];
+function getModules(defineCallNode: CallExpression): {
+  list: Module[];
+  varCount: number;
+} {
+  const list: Module[] = [];
 
-  let nameCount = 0;
   let varCount = 0;
 
   if (
     defineCallNode?.type === 'CallExpression' &&
+    defineCallNode.callee.type === 'Identifier' &&
     defineCallNode.callee.name === 'define'
   ) {
     const argCount = defineCallNode.arguments.length;
 
     if (argCount < 2 || argCount > 3) {
-      return modules;
+      return { list, varCount };
     }
 
     const moduleList = defineCallNode.arguments[argCount - 2];
@@ -94,10 +97,10 @@ function getModules(defineCallNode: CallExpression) {
       (callback.type !== 'FunctionExpression' &&
         callback.type !== 'ArrowFunctionExpression')
     ) {
-      return modules;
+      return { list, varCount };
     }
 
-    nameCount = moduleList.elements.length;
+    const nameCount = moduleList.elements.length;
     varCount = callback.params.length;
 
     const longerList =
@@ -107,41 +110,40 @@ function getModules(defineCallNode: CallExpression) {
       const nameNode = moduleList.elements[i];
       const varNode = callback.params[i];
 
-      modules.push({
-        name: nameNode ? nameNode.value : null,
-        variable: varNode ? varNode.name : null,
+      const literalNameNode = nameNode?.type === 'Literal' ? nameNode : null;
+      const identVarNode = varNode?.type === 'Identifier' ? varNode : null;
+
+      list.push({
+        name: literalNameNode ? (literalNameNode.value as string) : null,
+        variable: identVarNode ? identVarNode.name : null,
         nodes: {
-          name: nameNode,
-          variable: varNode,
+          name: literalNameNode,
+          variable: identVarNode,
         },
         isValid:
-          !!nameNode &&
-          (moduleNames.includes(nameNode.value) ||
-            !N_MODULE_REGEX.test(nameNode.value)),
+          !!literalNameNode &&
+          (moduleNames.includes(literalNameNode.value as string) ||
+            !N_MODULE_REGEX.test(literalNameNode.value as string)),
       });
     }
   }
 
-  return modules;
+  return { list, varCount };
 }
 
 function getModuleNames(defineCallNode: CallExpression) {
   const modules = getModules(defineCallNode);
-  const moduleNames = modules.map((module) => module.name);
-
-  return moduleNames;
+  return modules.list.map((module) => module.name);
 }
 
 function getModuleVars(defineCallNode: CallExpression) {
   const modules = getModules(defineCallNode);
-  const moduleVars = modules.map((module) => module.variable);
-
-  return moduleVars;
+  return modules.list.map((module) => module.variable);
 }
 
 function getModuleNodePair(defineCallNode: CallExpression, moduleName: string) {
   const modules = getModules(defineCallNode);
-  const targetModule = modules.find((m) => m.name === moduleName);
+  const targetModule = modules.list.find((m) => m.name === moduleName);
 
   return targetModule?.nodes;
 }

@@ -31,7 +31,7 @@ const rule: Rule.RuleModule = {
       if (modules.varCount === 0) return;
 
       for (const module of modules.list) {
-        if (!module.nodes.variable) continue;
+        if (!module.nodes.variable || !module.name) continue;
 
         const configVar = config[module.name];
 
@@ -50,10 +50,6 @@ const rule: Rule.RuleModule = {
   }),
 };
 
-/**
- * Get schema properties from module names
- * @returns {Object}
- */
 function getSchemaProperties() {
   const properties = moduleNames.map((name) => {
     return {

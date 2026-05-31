@@ -1,5 +1,5 @@
 import type { Rule } from 'eslint';
-import type { CallExpression } from 'estree';
+import type { CallExpression, ReturnStatement, Statement } from 'estree';
 import { getScriptType } from '../utils/metadata';
 
 const rule: Rule.RuleModule = {
@@ -20,9 +20,9 @@ const rule: Rule.RuleModule = {
       let hasValidEntryPoint = false;
       const scriptType = getScriptType(context);
 
-      if (!scriptType?.value || !scriptType.def) {
-        return;
-      }
+      if (!scriptType?.value) return;
+      if (!scriptType.def) return;
+      const def = scriptType.def;
 
       const argsCount = node.arguments.length;
       const callback = node.arguments[argsCount - 1];
@@ -35,18 +35,22 @@ const rule: Rule.RuleModule = {
         return;
       }
 
-      const hasBlockBody = callback.body.type === 'BlockStatement';
-      const callbackBody = hasBlockBody ? callback.body.body : [];
-      const returnStatement =
-        hasBlockBody && callbackBody.find((n) => n.type === 'ReturnStatement');
-      const returnArgument = hasBlockBody
-        ? returnStatement?.argument
-        : callback.body;
+      const callbackBody =
+        callback.body.type === 'BlockStatement' ? callback.body.body : [];
+      const returnStatement = callbackBody.find(
+        (n): n is ReturnStatement => n.type === 'ReturnStatement',
+      );
+      const returnArgument =
+        callback.body.type !== 'BlockStatement'
+          ? callback.body
+          : returnStatement?.argument;
 
       if (returnArgument?.type === 'ObjectExpression') {
         for (const property of returnArgument.properties) {
           if (
-            scriptType.def.entryPoints.includes(property.key.name) &&
+            property.type === 'Property' &&
+            property.key.type === 'Identifier' &&
+            def.entryPoints.includes(property.key.name) &&
             (property.value.type === 'Identifier' ||
               property.value.type === 'FunctionExpression' ||
               property.value.type === 'ArrowFunctionExpression')
@@ -59,14 +63,14 @@ const rule: Rule.RuleModule = {
 
       if (returnArgument && returnArgument.type === 'Identifier') {
         const returnAssignments = callbackBody.filter(
-          (n) =>
+          (n: Statement) =>
             n.type === 'ExpressionStatement' &&
             n.expression.type === 'AssignmentExpression' &&
             n.expression.left.type === 'MemberExpression' &&
+            n.expression.left.object.type === 'Identifier' &&
             n.expression.left.object.name === returnArgument.name &&
-            scriptType.def.entryPoints.includes(
-              n.expression.left.property.name,
-            ),
+            n.expression.left.property.type === 'Identifier' &&
+            def.entryPoints.includes(n.expression.left.property.name),
         );
 
         if (returnAssignments.length > 0) {
@@ -74,7 +78,7 @@ const rule: Rule.RuleModule = {
         }
       }
 
-      if (scriptType.def.entryPoints.length === 0) {
+      if (def.entryPoints.length === 0) {
         hasValidEntryPoint = true;
       }
 

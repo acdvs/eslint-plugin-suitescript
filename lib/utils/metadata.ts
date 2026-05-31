@@ -1,10 +1,22 @@
 import type { Rule } from 'eslint';
+import type { Position } from 'estree';
 import { getScriptTypeDef } from './script-types';
 
 const SCRIPT_TAG = '@NScriptType';
 const SCRIPT_TAG_REGEX = /@NScriptType(?: (\S+))?/;
 
-function getScriptType(context: Rule.RuleContext) {
+type Loc = { start: Position; end: Position };
+
+type ScriptTypeInfo = {
+  value: string | undefined;
+  def: ReturnType<typeof getScriptTypeDef> | undefined;
+  locs: {
+    tag: Loc;
+    value: Loc | false;
+  };
+};
+
+function getScriptType(context: Rule.RuleContext): ScriptTypeInfo | undefined {
   const sourceCode = context.sourceCode;
   const comment = sourceCode
     .getAllComments()
@@ -16,26 +28,24 @@ function getScriptType(context: Rule.RuleContext) {
 
   const scriptType = comment.value.match(SCRIPT_TAG_REGEX)?.[1];
 
-  if (!scriptType) {
-    return;
-  }
-
   const commentIndex = sourceCode.getIndexFromLoc(comment.loc.start) + 1;
   const tagIndex = commentIndex + comment.value.indexOf(SCRIPT_TAG) + 1;
   const typeIndex = tagIndex + SCRIPT_TAG.length + 1;
 
   return {
     value: scriptType,
-    def: getScriptTypeDef(scriptType),
+    def: scriptType ? getScriptTypeDef(scriptType) : undefined,
     locs: {
       tag: {
         start: sourceCode.getLocFromIndex(tagIndex),
         end: sourceCode.getLocFromIndex(tagIndex + SCRIPT_TAG.length),
       },
-      value: scriptType && {
-        start: sourceCode.getLocFromIndex(typeIndex),
-        end: sourceCode.getLocFromIndex(typeIndex + scriptType.length),
-      },
+      value: scriptType
+        ? {
+            start: sourceCode.getLocFromIndex(typeIndex),
+            end: sourceCode.getLocFromIndex(typeIndex + scriptType.length),
+          }
+        : false,
     },
   };
 }

@@ -38,7 +38,7 @@ const rule: Rule.RuleModule = {
         return;
       }
 
-      if (logModule) {
+      if (logModule?.name) {
         context.report({
           node: logModule.name,
           messageId: 'useGlobalLog',

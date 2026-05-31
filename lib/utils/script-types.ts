@@ -81,13 +81,10 @@ const scriptTypes = [
 ];
 
 function getScriptTypeDef(scriptType: string) {
-  return (
-    !!scriptType &&
-    scriptTypes.find((x) => x.name.toLowerCase() === scriptType.toLowerCase())
+  if (!scriptType) return undefined;
+  return scriptTypes.find(
+    (x) => x.name.toLowerCase() === scriptType.toLowerCase(),
   );
 }
 
-module.exports = {
-  scriptTypes,
-  getScriptTypeDef,
-};
+export { getScriptTypeDef, scriptTypes };

@@ -1,9 +1,4 @@
-import type {
-  Identifier,
-  ObjectExpression,
-  Property,
-  SpreadElement,
-} from 'estree';
+import type { ObjectExpression, Property, SpreadElement } from 'estree';
 
 function getPropByKey(obj: ObjectExpression, key: string) {
   for (const _prop of obj.properties) {
@@ -17,11 +12,6 @@ function getPropByKey(obj: ObjectExpression, key: string) {
   return null;
 }
 
-/**
- * Gets a list of all properties in an AST object node
- * @param {ASTNode} obj Target object
- * @returns {Array}
- */
 function getPropList(obj: ObjectExpression) {
   return obj.properties
     .map((prop) => propAsIdentProp(prop)?.key.name)
@@ -32,7 +22,7 @@ function propAsIdentProp(prop: Property | SpreadElement) {
   return prop.type === 'Property' && prop.key.type === 'Identifier'
     ? {
         ...prop,
-        key: prop.key as Identifier,
+        key: prop.key,
       }
     : null;
 }
