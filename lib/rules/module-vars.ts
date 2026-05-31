@@ -1,8 +1,11 @@
 import path from 'node:path';
+import { getDefineCall } from '@acdvs/eslint-plugin-amd/utils';
 import type { Rule } from 'eslint';
-import type { CallExpression } from 'estree';
+import type { CallExpression, Identifier } from 'estree';
 import pkg from '../../package.json';
-import { getModules, moduleNames } from '../utils/modules';
+import { MODULES, type ModuleName } from '../utils/modules';
+
+type Options = Partial<Record<ModuleName, string>>;
 
 const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
@@ -24,44 +27,48 @@ const rule: Rule.RuleModule = {
         additionalProperties: false,
       },
     ],
+    defaultOptions: [MODULES],
   },
-  create: (context) => ({
-    'CallExpression[callee.name=define]': (node: CallExpression) => {
-      if (!context.options[0]) return;
+  create: (context) => {
+    const config = (context.options[0] ?? {}) as Options;
 
-      const config = context.options[0];
-      const modules = getModules(node);
+    return {
+      'CallExpression[callee.name=define]': (node: CallExpression) => {
+        if (!context.options[0]) return;
 
-      if (modules.varCount === 0) return;
+        const defineCall = getDefineCall(node);
+        const pairs = defineCall?.depAnalysis?.pairs;
 
-      for (const module of modules.list) {
-        if (!module.nodes.variable || !module.name) continue;
+        if (!pairs) return;
 
-        const configVar = config[module.name];
+        for (const pair of pairs) {
+          const moduleName = pair.name?.value as ModuleName;
+          const param = pair.param as Identifier;
+          const paramName = param.name as ModuleName;
+          const configParamName = config[moduleName];
 
-        if (configVar && configVar !== module.variable) {
-          context.report({
-            node: module.nodes.variable,
-            messageId: 'useCorrectName',
-            data: {
-              module: module.name,
-              id: configVar,
-            },
-          });
+          if (paramName !== configParamName) {
+            context.report({
+              node: param,
+              messageId: 'useCorrectName',
+              data: {
+                module: moduleName,
+                id: configParamName,
+              },
+            });
+          }
         }
-      }
-    },
-  }),
+      },
+    };
+  },
 };
 
 function getSchemaProperties() {
-  const properties = moduleNames.map((name) => {
-    return {
-      [name]: {
-        type: 'string',
-      },
-    };
-  });
+  const properties = Object.keys(MODULES).map((name) => ({
+    [name]: {
+      type: 'string',
+    },
+  }));
 
   return Object.assign({}, ...properties);
 }
