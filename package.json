@@ -16,7 +16,7 @@
     "build:docs": "tsx scripts/generate-docs.ts",
     "check": "biome check",
     "check:types": "tsc -p tsconfig.dev.json",
-    "test": "ts-mocha -p tsconfig.dev.json tests/** --recursive --reporter min"
+    "test": "node --test --require tsx tests/rules/**.ts"
   },
   "files": [
     "LICENSE",
@@ -41,7 +41,6 @@
     "@types/estree": "^1.0.8",
     "@types/node": "^25.6.0",
     "eslint": "^10.0.0",
-    "ts-mocha": "^11.1.0",
     "tsc-alias": "^1.8.17",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"

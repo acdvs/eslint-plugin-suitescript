@@ -1,168 +1,167 @@
+import path from 'node:path';
 import rule from '../../lib/rules/script-type';
-import ruleTester from '../rule-tester';
+import ruleTester, { createTests } from '../rule-tester';
 
-ruleTester.run('script-type', rule, {
-  valid: [
-    {
-      code: `
-/**
- * @NScriptType BundleInstallationScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType bundleinstallationscript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType ClientScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType FiParserPlugin
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType MapReduceScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType MassUpdateScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType Portlet
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType Restlet
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType ScheduledScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType SDFInstallationScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType Suitelet
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType UserEventScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType WorkflowActionScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NScriptType Suitelet
- */
-/**
- * @NScriptType SuiteletScript
- */
-      `,
-    },
-    {
-      code: `
-/**
- * Not a script type tag
- */
-      `,
-    },
-    {
-      code: '// @NScriptType SuiteletScript',
-    },
-  ],
+const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
-  invalid: [
-    {
-      code: `
-/**
- * @NScriptType
- */
-      `,
-      errors: [{ messageId: 'noValue' }],
-    },
-    {
-      code: `
-/**
- * @NScriptType PortletScript
- */
-      `,
-      errors: [{ messageId: 'invalidValue', data: { value: 'PortletScript' } }],
-    },
-    {
-      code: `
-/**
- * @NScriptType RestletScript
- */
-      `,
-      errors: [{ messageId: 'invalidValue', data: { value: 'RestletScript' } }],
-    },
-    {
-      code: `
-/**
- * @NScriptType SuiteletScript
- */
-      `,
-      errors: [
-        { messageId: 'invalidValue', data: { value: 'SuiteletScript' } },
-      ],
-    },
-    {
-      code: `
-/**
- * @NScriptType SuiteletScript
- */
-/**
- * @NScriptType Suitelet
- */
-      `,
-      errors: [
-        { messageId: 'invalidValue', data: { value: 'SuiteletScript' } },
-      ],
-    },
-  ],
-});
+const valid = createTests([
+  {
+    code: `
+      /**
+       * @NScriptType BundleInstallationScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType bundleinstallationscript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType ClientScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType FiParserPlugin
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType MapReduceScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType MassUpdateScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType Portlet
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType Restlet
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType ScheduledScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType SDFInstallationScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType Suitelet
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType UserEventScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType WorkflowActionScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NScriptType Suitelet
+       */
+      /**
+       * @NScriptType SuiteletScript
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * Not a script type tag
+       */
+    `,
+  },
+  {
+    code: '// @NScriptType SuiteletScript',
+  },
+]);
+
+const invalid = createTests([
+  {
+    code: `
+      /**
+       * @NScriptType
+       */
+    `,
+    errors: [{ messageId: 'noValue' }],
+  },
+  {
+    code: `
+      /**
+       * @NScriptType PortletScript
+       */
+    `,
+    errors: [{ messageId: 'invalidValue', data: { value: 'PortletScript' } }],
+  },
+  {
+    code: `
+      /**
+       * @NScriptType RestletScript
+       */
+    `,
+    errors: [{ messageId: 'invalidValue', data: { value: 'RestletScript' } }],
+  },
+  {
+    code: `
+      /**
+       * @NScriptType SuiteletScript
+       */
+    `,
+    errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
+  },
+  {
+    code: `
+      /**
+       * @NScriptType SuiteletScript
+       */
+      /**
+       * @NScriptType Suitelet
+       */
+    `,
+    errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
+  },
+]);
+
+ruleTester.run(RULE_NAME, rule, { valid, invalid });

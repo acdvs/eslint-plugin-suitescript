@@ -1,86 +1,89 @@
+import path from 'node:path';
 import rule from '../../lib/rules/api-version';
-import ruleTester from '../rule-tester';
+import ruleTester, { createTests } from '../rule-tester';
 
-ruleTester.run('api-version', rule, {
-  valid: [
-    {
-      code: `
-/**
- * @NApiVersion 1.0
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NApiVersion 2.x
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NApiVersion 2.0
- */
-      `,
-    },
-    {
-      code: `
-/**
- * @NApiVersion 2.1
- */
-      `,
-    },
-  ],
+const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
-  invalid: [
-    {
-      code: `
-/**
- * @NApiVersion
- */
+const valid = createTests([
+  {
+    code: `
+      /**
+       * @NApiVersion 1.0
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 2.x
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 2.0
+       */
+    `,
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 2.1
+       */
+    `,
+  },
+]);
+
+const invalid = createTests([
+  {
+    code: `
+      /**
+       * @NApiVersion
+       */
       `,
-      errors: [{ messageId: 'noValue' }],
-    },
-    {
-      code: `
-/**
- * @NApiVersion 1
- */
+    errors: [{ messageId: 'noValue' }],
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 1
+       */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 1 } }],
-    },
-    {
-      code: `
-/**
- * @NApiVersion 2
- */
+    errors: [{ messageId: 'invalidValue', data: { value: 1 } }],
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 2
+       */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 2 } }],
-    },
-    {
-      code: `
-/**
- * @NApiVersion 3
- */
+    errors: [{ messageId: 'invalidValue', data: { value: 2 } }],
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 3
+       */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 3 } }],
-    },
-    {
-      code: `
-/**
- * @NApiVersion 2.2
- */
+    errors: [{ messageId: 'invalidValue', data: { value: 3 } }],
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion 2.2
+       */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 2.2 } }],
-    },
-    {
-      code: `
-/**
- * @NApiVersion test
- */
+    errors: [{ messageId: 'invalidValue', data: { value: 2.2 } }],
+  },
+  {
+    code: `
+      /**
+       * @NApiVersion test
+       */
       `,
-      errors: [{ messageId: 'invalidValue', data: { value: 'test' } }],
-    },
-  ],
-});
+    errors: [{ messageId: 'invalidValue', data: { value: 'test' } }],
+  },
+]);
+
+ruleTester.run(RULE_NAME, rule, { valid, invalid });
