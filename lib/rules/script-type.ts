@@ -1,12 +1,16 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
+import pkg from '../../package.json';
 import { getScriptType } from '../utils/metadata';
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Enforce valid @NScriptType tag values',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/script-type.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     schema: [],
     messages: {

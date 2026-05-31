@@ -1,6 +1,10 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
 import type { CallExpression, ReturnStatement, Statement } from 'estree';
+import pkg from '../../package.json';
 import { getScriptType } from '../utils/metadata';
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -8,7 +12,7 @@ const rule: Rule.RuleModule = {
     docs: {
       description:
         'Enforce inclusion of at least one entry point based on @NScriptType',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/entry-points.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     schema: [],
     messages: {

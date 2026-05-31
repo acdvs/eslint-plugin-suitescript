@@ -1,7 +1,11 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
 import type { CallExpression } from 'estree';
+import pkg from '../../package.json';
 import { getModuleNodePair, type ModuleNodes } from '../utils/modules';
 import { getPropByKey } from '../utils/objects';
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 type Options = {
   requireTitle: boolean;
@@ -15,7 +19,7 @@ const rule: Rule.RuleModule = {
     type: 'suggestion',
     docs: {
       description: 'Enforce correct log arguments',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/log-args.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     messages: {
       titleRequired: "A log title is required with 'Log.{{ prop }}'",

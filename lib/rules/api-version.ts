@@ -1,15 +1,19 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
+import pkg from '../../package.json';
 
 const VERSION_TAG = '@NApiVersion';
 const VERSION_TAG_REGEX = /@NApiVersion(?: (\S+))?/;
 const VERSIONS = ['1.0', '2.x', '2.0', '2.1'];
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Enforce valid @NApiVersion tag values',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/api-version.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     schema: [],
     messages: {

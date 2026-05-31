@@ -1,7 +1,11 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
 import type { CallExpression } from 'estree';
+import pkg from '../../package.json';
 import { getScriptType } from '../utils/metadata';
 import { getModuleNodePair } from '../utils/modules';
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -9,7 +13,7 @@ const rule: Rule.RuleModule = {
     docs: {
       description:
         'Restrict loading of the N/log module in favor of global log',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/no-log-module.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     messages: {
       useGlobalLog: 'Use global log instead of the N/log module',

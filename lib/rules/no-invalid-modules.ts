@@ -1,13 +1,17 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
 import type { CallExpression, Literal } from 'estree';
+import pkg from '../../package.json';
 import { getModules } from '../utils/modules';
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 const rule: Rule.RuleModule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Enforce valid SuiteScript modules in define array',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/no-invalid-modules.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     schema: [],
     messages: {

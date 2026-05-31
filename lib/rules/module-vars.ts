@@ -1,6 +1,10 @@
+import path from 'node:path';
 import type { Rule } from 'eslint';
 import type { CallExpression } from 'estree';
+import pkg from '../../package.json';
 import { getModules, moduleNames } from '../utils/modules';
+
+const RULE_NAME = path.basename(import.meta.filename, '.ts');
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -8,7 +12,7 @@ const rule: Rule.RuleModule = {
     docs: {
       description:
         'Enforce correct module identifiers for each configured module',
-      url: 'https://github.com/acdvs/eslint-plugin-suitescript/blob/master/docs/rules/module-vars.md',
+      url: `${pkg.homepage}/blob/master/docs/rules/${RULE_NAME}.md`,
     },
     messages: {
       useCorrectName: "Identifier for {{ module }} should be '{{ id }}'",
