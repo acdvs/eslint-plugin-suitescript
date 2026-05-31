@@ -5,7 +5,7 @@ import { scriptTypes } from '../lib/utils/script-types';
 
 const SRC_DIR = './docs/src';
 const OUT_DIR = './docs/rules';
-const SCRIPT_NAME = path.basename(__filename);
+const SCRIPT_NAME = path.basename(import.meta.filename, '.ts');
 
 type DocReplaceOptions = Record<string, string>;
 
@@ -13,30 +13,19 @@ const docsToModify: Record<string, DocReplaceOptions> = {
   'entry-points.md': {
     old: '<ENTRY_POINTS>',
     new: scriptTypes
-      .reduce((lines: string[], st) => {
-        lines.push(`- ${st.name}`);
-        st.entryPoints.forEach((ep) => (lines.push(`  - ${ep}`)));
-        return lines;
-      }, [])
+      .flatMap((st) => [
+        `- ${st.name}`,
+        ...st.entryPoints.map((ep) => `  - ${ep}`),
+      ])
       .join('\n'),
   },
   'module-vars.md': {
     old: '<MODULE_NAMES>',
-    new: moduleNames
-      .reduce((lines: string[], m) => {
-        lines.push(`- ${m}`);
-        return lines;
-      }, [])
-      .join('\n'),
+    new: moduleNames.map((m) => `- ${m}`).join('\n'),
   },
   'script-type.md': {
     old: '<SCRIPT_TYPES>',
-    new: scriptTypes
-      .reduce((lines: string[], st) => {
-        lines.push(`- ${st.name}`);
-        return lines;
-      }, [])
-      .join('\n'),
+    new: scriptTypes.map((st) => `- ${st.name}`).join('\n'),
   },
 };
 
@@ -60,7 +49,7 @@ async function generateDocs() {
       continue;
     }
 
-    const data = await readDoc(fromPath);  
+    const data = await readDoc(fromPath);
     const newContent = data?.replaceAll(options.old, options.new);
 
     if (newContent) {
@@ -90,7 +79,9 @@ async function copyDoc(fromPath: string, toPath: string) {
   try {
     await fs.copyFile(fromPath, toPath);
   } catch {
-    console.error(`[${SCRIPT_NAME}] Error copying doc from ${fromPath} to ${toPath}`);
+    console.error(
+      `[${SCRIPT_NAME}] Error copying doc from ${fromPath} to ${toPath}`,
+    );
   }
 }
 
