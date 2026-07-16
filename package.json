@@ -32,7 +32,8 @@
     "check": "biome check",
     "check:fix": "biome check --fix",
     "check:types": "tsc --noemit",
-    "test": "node --test --require tsx tests/rules/**.ts"
+    "test": "node --test --require tsx tests/rules/**.ts",
+    "test:e2e": "pnpm build && node --test tests/e2e/e2e.test.mjs"
   },
   "files": [
     "LICENSE",
