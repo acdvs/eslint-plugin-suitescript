@@ -30,6 +30,7 @@
     "build": "tsdown",
     "build:docs": "tsx scripts/generate-docs.ts",
     "check": "biome check",
+    "check:fix": "biome check --fix",
     "check:types": "tsc --noemit",
     "test": "node --test --require tsx tests/rules/**.ts"
   },
