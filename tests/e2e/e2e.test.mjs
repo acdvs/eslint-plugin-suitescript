@@ -25,7 +25,6 @@ const expected = {
     'suitescript/log-args',
     'suitescript/module-vars',
     'suitescript/module-vars',
-    'suitescript/module-vars',
     'suitescript/no-invalid-modules',
     'suitescript/no-log-module',
   ],
