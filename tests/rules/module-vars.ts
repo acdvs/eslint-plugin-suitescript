@@ -23,6 +23,10 @@ const valid = createTests([
     code: 'define(["N/file", "N/runtime"], (f, r) => {});',
     options: [{ 'N/file': 'f', 'N/runtime': 'r' }],
   },
+  {
+    name: 'invalid N module var ignored',
+    code: 'define(["N/foo"], (foo) => {});',
+  },
 ]);
 
 const invalid = createTests([

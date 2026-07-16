@@ -47,7 +47,7 @@ const rule: Rule.RuleModule = {
           const paramName = param.name as ModuleName;
           const configParamName = config[moduleName];
 
-          if (paramName !== configParamName) {
+          if (configParamName && paramName !== configParamName) {
             context.report({
               node: param,
               messageId: 'useCorrectName',
