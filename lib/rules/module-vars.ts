@@ -3,7 +3,7 @@ import { getDefineCall } from '@acdvs/eslint-plugin-amd/utils';
 import type { Rule } from 'eslint';
 import type { CallExpression, Identifier } from 'estree';
 import pkg from '../../package.json';
-import { MODULES, type ModuleName } from '../utils/modules';
+import { type ModuleName, moduleNames, modules } from '../utils/modules';
 
 type Options = Partial<Record<ModuleName, string>>;
 
@@ -27,7 +27,7 @@ const rule: Rule.RuleModule = {
         additionalProperties: false,
       },
     ],
-    defaultOptions: [MODULES],
+    defaultOptions: [modules],
   },
   create: (context) => {
     const config = (context.options[0] ?? {}) as Options;
@@ -64,7 +64,7 @@ const rule: Rule.RuleModule = {
 };
 
 function getSchemaProperties() {
-  const properties = Object.keys(MODULES).map((name) => ({
+  const properties = moduleNames.map((name) => ({
     [name]: {
       type: 'string',
     },

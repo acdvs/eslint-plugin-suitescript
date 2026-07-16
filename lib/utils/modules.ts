@@ -1,18 +1,22 @@
 import type { CallExpression, Identifier, Literal } from 'estree';
 
-export type ModuleNodes = {
+export type ModuleName = keyof typeof modules;
+
+export interface ModuleNodes {
   name: Literal | null;
   variable: Identifier | null;
-};
-type Module = {
+}
+
+interface Module {
   name: string | null;
   variable: string | null;
   nodes: ModuleNodes;
   isValid: boolean;
-};
+}
 
 const N_MODULE_REGEX = /^N\//;
-const MODULES = {
+
+export const modules = {
   'N/action': 'action',
   'N/auth': 'auth',
   'N/cache': 'cache',
@@ -68,9 +72,9 @@ const MODULES = {
   'N/xml': 'xml',
 };
 
-const moduleNames = Object.keys(MODULES);
+export const moduleNames = Object.keys(modules);
 
-function getModules(defineCallNode: CallExpression): {
+export function getModules(defineCallNode: CallExpression): {
   list: Module[];
   varCount: number;
 } {
@@ -131,28 +135,22 @@ function getModules(defineCallNode: CallExpression): {
   return { list, varCount };
 }
 
-function getModuleNames(defineCallNode: CallExpression) {
+export function getModuleNames(defineCallNode: CallExpression) {
   const modules = getModules(defineCallNode);
   return modules.list.map((module) => module.name);
 }
 
-function getModuleVars(defineCallNode: CallExpression) {
+export function getModuleVars(defineCallNode: CallExpression) {
   const modules = getModules(defineCallNode);
   return modules.list.map((module) => module.variable);
 }
 
-function getModuleNodePair(defineCallNode: CallExpression, moduleName: string) {
+export function getModuleNodePair(
+  defineCallNode: CallExpression,
+  moduleName: string,
+) {
   const modules = getModules(defineCallNode);
   const targetModule = modules.list.find((m) => m.name === moduleName);
 
   return targetModule?.nodes;
 }
-
-export {
-  getModuleNames,
-  getModuleNodePair,
-  getModules,
-  getModuleVars,
-  MODULES,
-  moduleNames,
-};
