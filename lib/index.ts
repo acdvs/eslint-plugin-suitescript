@@ -1,20 +1,13 @@
 import type { ESLint } from 'eslint';
 import envGlobals from 'globals';
 import pkg from '../package.json';
+import rules from './rules';
 import globals from './utils/globals';
 import { modules } from './utils/modules';
 
 const plugin: ESLint.Plugin = {
   meta: { name: pkg.name, version: pkg.version },
-  rules: {
-    'api-version': require('./rules/api-version'),
-    'entry-points': require('./rules/entry-points'),
-    'log-args': require('./rules/log-args'),
-    'module-vars': require('./rules/module-vars'),
-    'no-invalid-modules': require('./rules/no-invalid-modules'),
-    'no-log-module': require('./rules/no-log-module'),
-    'script-type': require('./rules/script-type'),
-  },
+  rules,
 };
 
 plugin.configs = {
