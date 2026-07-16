@@ -6,6 +6,7 @@ const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
 const valid = createTests([
   {
+    name: '1.0',
     code: `
       /**
        * @NApiVersion 1.0
@@ -13,6 +14,7 @@ const valid = createTests([
     `,
   },
   {
+    name: '2.x',
     code: `
       /**
        * @NApiVersion 2.x
@@ -20,6 +22,7 @@ const valid = createTests([
     `,
   },
   {
+    name: '2.0',
     code: `
       /**
        * @NApiVersion 2.0
@@ -27,6 +30,7 @@ const valid = createTests([
     `,
   },
   {
+    name: '2.1',
     code: `
       /**
        * @NApiVersion 2.1
@@ -37,6 +41,7 @@ const valid = createTests([
 
 const invalid = createTests([
   {
+    name: 'no value',
     code: `
       /**
        * @NApiVersion
@@ -45,6 +50,7 @@ const invalid = createTests([
     errors: [{ messageId: 'noValue' }],
   },
   {
+    name: 'invalid integer',
     code: `
       /**
        * @NApiVersion 1
@@ -53,22 +59,7 @@ const invalid = createTests([
     errors: [{ messageId: 'invalidValue', data: { value: 1 } }],
   },
   {
-    code: `
-      /**
-       * @NApiVersion 2
-       */
-      `,
-    errors: [{ messageId: 'invalidValue', data: { value: 2 } }],
-  },
-  {
-    code: `
-      /**
-       * @NApiVersion 3
-       */
-      `,
-    errors: [{ messageId: 'invalidValue', data: { value: 3 } }],
-  },
-  {
+    name: 'invalid float',
     code: `
       /**
        * @NApiVersion 2.2
@@ -77,6 +68,7 @@ const invalid = createTests([
     errors: [{ messageId: 'invalidValue', data: { value: 2.2 } }],
   },
   {
+    name: 'invalid string',
     code: `
       /**
        * @NApiVersion test

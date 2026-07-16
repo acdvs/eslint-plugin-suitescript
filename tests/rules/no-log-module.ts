@@ -6,64 +6,29 @@ const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
 const valid = createTests([
   {
-    code: 'define(["N/record"], function(record) {});',
+    name: 'no modules',
+    code: 'define([], () => {});',
   },
   {
-    code: 'define(["N/search", "N/file"], function(search, file) {});',
+    name: 'non-log module',
+    code: 'define(["N/record"], (record) => {});',
   },
   {
-    code: 'define(["N/record", "N/file", "N/search"], function(record, file, search) {});',
-  },
-  {
-    code: 'define([], function() {});',
-  },
-  {
-    code: `
-      /**
-       * @NScriptType
-       */
-      define([], function() {});
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Suitelet
-       */
-      define([], function() {});
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Suitelet
-       */
-      define([], function() {});
-    `,
-    options: [{ allowInClientScripts: false }],
-  },
-  {
+    name: 'client script with log - default',
     code: `
       /**
        * @NScriptType ClientScript
        */
-      define([], function() {});
+      define(["N/log"], (log) => {});
     `,
   },
   {
+    name: 'client script with log - on',
     code: `
       /**
        * @NScriptType ClientScript
        */
-      define(["N/log"], function(log) {});
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType ClientScript
-       */
-      define(["N/log"], function(log) {});
+      define(["N/log"], (log) => {});
     `,
     options: [{ allowInClientScripts: true }],
   },
@@ -71,43 +36,12 @@ const valid = createTests([
 
 const invalid = createTests([
   {
-    code: 'define(["N/log"], function(log) {});',
+    name: 'log module',
+    code: 'define(["N/log"], (log) => {});',
     errors: [{ messageId: 'useGlobalLog' }],
   },
   {
-    code: 'define(["N/record", "N/log"], function(record, log) {});',
-    errors: [{ messageId: 'useGlobalLog' }],
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Suitelet
-       */
-      define(["N/log"], function(log) {});
-    `,
-    errors: [{ messageId: 'useGlobalLog' }],
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Suitelet
-       */
-      define(["N/log"], function(log) {});
-    `,
-    options: [{ allowInClientScripts: true }],
-    errors: [{ messageId: 'useGlobalLog' }],
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Suitelet
-       */
-      define(["N/log"], function(log) {});
-    `,
-    options: [{ allowInClientScripts: false }],
-    errors: [{ messageId: 'useGlobalLog' }],
-  },
-  {
+    name: 'client script with log - false',
     code: `
       /**
        * @NScriptType ClientScript

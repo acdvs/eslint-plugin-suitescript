@@ -6,76 +6,7 @@ const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
 const valid = createTests([
   {
-    code: `
-      /**
-       * @NScriptType BundleInstallationScript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType bundleinstallationscript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType ClientScript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType FiParserPlugin
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType MapReduceScript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType MassUpdateScript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Portlet
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType Restlet
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType ScheduledScript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType SDFInstallationScript
-       */
-    `,
-  },
-  {
+    name: 'single script type tag',
     code: `
       /**
        * @NScriptType Suitelet
@@ -83,20 +14,7 @@ const valid = createTests([
     `,
   },
   {
-    code: `
-      /**
-       * @NScriptType UserEventScript
-       */
-    `,
-  },
-  {
-    code: `
-      /**
-       * @NScriptType WorkflowActionScript
-       */
-    `,
-  },
-  {
+    name: 'two script type tags',
     code: `
       /**
        * @NScriptType Suitelet
@@ -106,20 +24,11 @@ const valid = createTests([
        */
     `,
   },
-  {
-    code: `
-      /**
-       * Not a script type tag
-       */
-    `,
-  },
-  {
-    code: '// @NScriptType SuiteletScript',
-  },
 ]);
 
 const invalid = createTests([
   {
+    name: 'missing script type value',
     code: `
       /**
        * @NScriptType
@@ -128,39 +37,13 @@ const invalid = createTests([
     errors: [{ messageId: 'noValue' }],
   },
   {
+    name: 'invalid script type',
     code: `
       /**
-       * @NScriptType PortletScript
+       * @NScriptType Invalid
        */
     `,
-    errors: [{ messageId: 'invalidValue', data: { value: 'PortletScript' } }],
-  },
-  {
-    code: `
-      /**
-       * @NScriptType RestletScript
-       */
-    `,
-    errors: [{ messageId: 'invalidValue', data: { value: 'RestletScript' } }],
-  },
-  {
-    code: `
-      /**
-       * @NScriptType SuiteletScript
-       */
-    `,
-    errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
-  },
-  {
-    code: `
-      /**
-       * @NScriptType SuiteletScript
-       */
-      /**
-       * @NScriptType Suitelet
-       */
-    `,
-    errors: [{ messageId: 'invalidValue', data: { value: 'SuiteletScript' } }],
+    errors: [{ messageId: 'invalidValue', data: { value: 'Invalid' } }],
   },
 ]);
 

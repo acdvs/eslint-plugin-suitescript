@@ -6,33 +6,37 @@ const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
 const valid = createTests([
   {
-    code: 'define(["N/record"], function(record) {});',
+    name: 'N module',
+    code: 'define(["N/record"], (record) => {});',
   },
   {
-    code: 'define(["N/search"], function(search) {});',
+    name: 'custom module',
+    code: 'define(["customModule"], (customModule) => {});',
   },
   {
-    code: 'define(["customModule"], function(customModule) {});',
+    name: 'N and custom modules',
+    code: 'define(["customModule", "N/file"], (customModule, file) => {});',
   },
   {
-    code: 'define(["customModule", "N/file"], function(customModule, file) {});',
-  },
-  {
-    code: 'define([], function() {});',
+    name: 'no modules',
+    code: 'define([], () => {});',
   },
 ]);
 
 const invalid = createTests([
   {
-    code: 'define(["N/invalid"], function(invalid) {});',
+    name: 'invalid N module',
+    code: 'define(["N/invalid"], (invalid) => {});',
     errors: [{ messageId: 'invalidModule', data: { module: 'N/invalid' } }],
   },
   {
-    code: 'define(["N/file", "N/invalid"], function(file, invalid) {});',
+    name: 'invalid and valid N modules',
+    code: 'define(["N/file", "N/invalid"], (file, invalid) => {});',
     errors: [{ messageId: 'invalidModule', data: { module: 'N/invalid' } }],
   },
   {
-    code: 'define(["customModule", "N/invalid"], function(customModule, invalid) {});',
+    name: 'invalid N module and custom module',
+    code: 'define(["customModule", "N/invalid"], (customModule, invalid) => {});',
     errors: [{ messageId: 'invalidModule', data: { module: 'N/invalid' } }],
   },
 ]);

@@ -6,35 +6,29 @@ const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
 const valid = createTests([
   {
-    code: 'define(["N/record"], function(record) {});',
-    options: [{ 'N/record': 'record' }],
+    name: 'one module, default name',
+    code: 'define(["N/record"], (record) => {});',
   },
   {
-    code: 'define(["N/https"], function(https) {});',
-    options: [{ 'N/https': 'https' }],
-  },
-  {
-    code: 'define(["N/ui/serverWidget"], function(ui) {});',
+    name: 'one module, custom name',
+    code: 'define(["N/ui/serverWidget"], (ui) => {});',
     options: [{ 'N/ui/serverWidget': 'ui' }],
   },
   {
-    code: 'define(["N/file", "N/runtime"], function(file, runtime) {});',
-    options: [{ 'N/file': 'file', 'N/runtime': 'runtime' }],
+    name: 'two modules, default names',
+    code: 'define(["N/file", "N/runtime"], (file, runtime) => {});',
   },
   {
-    code: 'define(["N/file", "N/runtime"], function(f, r) {});',
+    name: 'two modules, custom names',
+    code: 'define(["N/file", "N/runtime"], (f, r) => {});',
     options: [{ 'N/file': 'f', 'N/runtime': 'r' }],
-  },
-  {
-    code: 'define(["N/record", "N/search"], function(record) {});',
-    options: [{ 'N/record': 'record', 'N/search': 'search' }],
   },
 ]);
 
 const invalid = createTests([
   {
-    code: 'define(["N/record"], function(test) {});',
-    options: [{ 'N/record': 'record' }],
+    name: 'one module, incorrect default name',
+    code: 'define(["N/record"], (test) => {});',
     errors: [
       {
         messageId: 'useCorrectName',
@@ -43,12 +37,16 @@ const invalid = createTests([
     ],
   },
   {
-    code: 'define(["N/record", "N/search"], function(wrongName) {});',
-    options: [{ 'N/record': 'record', 'N/search': 'search' }],
+    name: 'two modules, switched default names',
+    code: 'define(["N/record", "N/search"], (search, record) => {});',
     errors: [
       {
         messageId: 'useCorrectName',
         data: { module: 'N/record', id: 'record' },
+      },
+      {
+        messageId: 'useCorrectName',
+        data: { module: 'N/search', id: 'search' },
       },
     ],
   },

@@ -6,112 +6,93 @@ const RULE_NAME = path.basename(import.meta.filename, '.test.ts');
 
 const valid = createTests([
   {
+    name: 'title and details as args',
     code: `
-      define([], function() {
-        log.debug("title", "description");
+      define([], () => {
+        log.debug("title", "details");
       });
     `,
   },
   {
+    name: 'title and details in obj',
     code: `
-      define(["N/log", "N/extra"], function(logModule) {
-        log.debug("title", "description");
+      define([], () => {
+        log.debug({ title: "title", details: "details" });
       });
     `,
   },
   {
+    name: 'null title and details as args',
     code: `
-      define([], function() {
-        log.debug({ title: "Title", details: "Message" });
+      define([], () => {
+        log.debug(null, "details");
       });
     `,
   },
   {
+    name: 'title and null details as args',
     code: `
-      define([], function() {
-        log.debug({ title: "Title" });
+      define([], () => {
+        log.debug("title", null);
       });
     `,
-    options: [{ requireTitle: true }],
   },
   {
+    name: 'details off, only title as arg',
     code: `
-      define([], function() {
-        log.debug({ details: "Message" });
+      define([], () => {
+        log.debug("title");
       });
     `,
-    options: [{ requireDetails: true }],
+    options: [{ requireDetails: false }],
   },
   {
+    name: 'title off, only details in obj',
     code: `
-      define([], function() {
-        log.error({ details: "Error message" });
+      define([], () => {
+        log.debug({ details: "details" });
       });
     `,
-    options: [{ requireDetails: true }],
+    options: [{ requireTitle: false }],
   },
   {
+    name: 'details off, only title in obj',
     code: `
-      define([], function() {
-        log.custom({ details: "Message" });
+      define([], () => {
+        log.debug({ title: "title" });
       });
     `,
-    options: [{ requireDetails: true }],
-  },
-  {
-    code: `
-      define(["N/log"], function(log) {
-        log.debug({ details: "Message" });
-      });
-    `,
-    options: [{ requireDetails: true }],
-  },
-  {
-    code: `
-      define(["N/record"], function(record) {
-        log.debug({ title: "Message" });
-      });
-    `,
-    options: [{ requireTitle: true }],
+    options: [{ requireDetails: false }],
   },
 ]);
 
 const invalid = createTests([
   {
+    name: 'only title as arg',
     code: `
-      define([], function() {
+      define([], () => {
         log.debug("title");
       });
     `,
-    options: [{ requireDetails: true }],
     errors: [{ messageId: 'detailsRequired', data: { prop: 'debug' } }],
   },
   {
+    name: 'only title in obj',
     code: `
-      define([], function() {
-        log.audit("title");
+      define([], () => {
+        log.debug({ title: "title" });
       });
     `,
-    options: [{ requireDetails: true }],
-    errors: [{ messageId: 'detailsRequired', data: { prop: 'audit' } }],
-  },
-  {
-    code: `
-      define([], function() {
-        log.error({ details: "Message" }, "title");
-      });
-    `,
-    options: [{ requireTitle: true }],
-    errors: [{ messageId: 'titleRequired', data: { prop: 'error' } }],
-  },
-  {
-    code: `
-      define(["N/record", "N/log"], function(record, log) {
-        log.debug("test");
-      });
-    `,
-    options: [{ requireDetails: true }],
     errors: [{ messageId: 'detailsRequired', data: { prop: 'debug' } }],
+  },
+  {
+    name: 'only details in obj',
+    code: `
+      define([], () => {
+        log.debug({ details: "details" });
+      });
+    `,
+    errors: [{ messageId: 'titleRequired', data: { prop: 'debug' } }],
   },
 ]);
 
