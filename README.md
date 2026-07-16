@@ -46,7 +46,7 @@ export default [
 ];
 ```
 
-## Migration from v1.x
+## Upgrading to v2
 
 v2 is **flat-config only**. To migrate:
 
@@ -58,6 +58,14 @@ v2 is **flat-config only**. To migrate:
 `configs.recommended` already declares the AMD globals (`define`, `require`) and the standard browser globals (`window`, `document`, ...) that v1's `env: { amd: true, browser: true }` provided, so `no-undef` keeps working on `define([...], function() {})` modules and on client scripts that touch the DOM.
 
 Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
+
+## Upgrading to v3
+
+With v3, AMD-specific features have been abstracted to the separate [`@acdvs/eslint-plugin-amd`][eslint-plugin-amd] plugin, which should be installed along with this plugin.
+
+- Rule `suitescript/no-amd-name` is replaced by `amd/no-name`.
+- Rule `suitescript/no-extra-modules` is replaced by both `amd/no-extra-deps` and `amd/no-extra-params`.
+- Rule `suitescript/no-module-extensions` is replaced by `amd/no-module-extensions`.
 
 ## List of supported rules
 
