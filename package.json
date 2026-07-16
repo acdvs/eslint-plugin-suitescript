@@ -49,18 +49,18 @@
   },
   "dependencies": {
     "@acdvs/eslint-plugin-amd": "^1.0.0",
-    "globals": "^17.6.0"
+    "globals": "^17.7.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.14",
+    "@biomejs/biome": "^2.5.4",
     "@types/eslint": "^9.6.1",
-    "@types/estree": "^1.0.8",
-    "@types/node": "^25.6.0",
-    "eslint": "^10.0.0",
-    "tsc-alias": "^1.8.17",
-    "tsdown": "^0.22.0",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "@types/estree": "^1.0.9",
+    "@types/node": "^25.9.5",
+    "eslint": "^10.7.0",
+    "tsc-alias": "^1.9.1",
+    "tsdown": "^0.22.8",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
   },
   "peerDependencies": {
     "eslint": ">=9.0.0"
