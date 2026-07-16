@@ -29,6 +29,11 @@ const rule: Rule.RuleModule = {
         additionalProperties: false,
       },
     ],
+    defaultOptions: [
+      {
+        allowInClientScripts: true,
+      },
+    ],
   },
   create: (context) => ({
     'CallExpression[callee.name=define]': (node: CallExpression) => {

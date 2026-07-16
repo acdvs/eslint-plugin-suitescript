@@ -39,6 +39,12 @@ const rule: Rule.RuleModule = {
         additionalProperties: false,
       },
     ],
+    defaultOptions: [
+      {
+        requireTitle: true,
+        requireDetails: true,
+      },
+    ],
   },
   create: (context) => {
     const { requireTitle, requireDetails } = (context.options[0] ??
