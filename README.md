@@ -46,18 +46,9 @@ export default [
 ];
 ```
 
-## Migration from v1.x
+## Upgrading
 
-v2 is **flat-config only**. To migrate:
-
-- Replace `.eslintrc.*` with `eslint.config.js`.
-- Replace `extends: ['plugin:suitescript/recommended']` with `...suitescript.configs.recommended` (spread).
-- Replace `env: { 'suitescript/suitescript2': true }` with `...suitescript.configs.suitescript2`.
-- Bump `eslint` to `>= 9` in your project.
-
-`configs.recommended` already declares the AMD globals (`define`, `require`) and the standard browser globals (`window`, `document`, ...) that v1's `env: { amd: true, browser: true }` provided, so `no-undef` keeps working on `define([...], function() {})` modules and on client scripts that touch the DOM.
-
-Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
+See the [upgrade guide](docs/upgrade.md) for details on upgrading the package to a new major version.
 
 ## List of supported rules
 
@@ -65,11 +56,8 @@ Stay on `eslint-plugin-suitescript@^1` if you cannot migrate.
 - [suitescript/entry-points](docs/rules/entry-points.md): Enforces inclusion of at least one entry point based on `@NScriptType`
 - [suitescript/log-args](docs/rules/log-args.md): Enforces correct log arguments
 - [suitescript/module-vars](docs/rules/module-vars.md): Enforces correct module identifiers for each configured module
-- [suitescript/no-amd-name](docs/rules/no-amd-name.md): Restricts naming of AMD modules
-- [suitescript/no-extra-modules](docs/rules/no-extra-modules.md): Enforces equal number of module literals and identifiers
 - [suitescript/no-invalid-modules](docs/rules/no-invalid-modules.md): Enforces valid SuiteScript modules in `define` array
 - [suitescript/no-log-module](docs/rules/no-log-module.md): Restricts loading of the N/log module in favor of global `log`
-- [suitescript/no-module-extensions](docs/rules/no-module-extensions.md): Restricts filename extensions on module dependencies
 - [suitescript/script-type](docs/rules/script-type.md): Enforces valid `@NScriptType` tag values
 
 ## License

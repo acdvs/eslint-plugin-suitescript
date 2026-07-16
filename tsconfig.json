@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": true,
+    "isolatedModules": true,
+    "module": "esnext",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "noUncheckedSideEffectImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "target": "es2025",
+    "types": ["eslint", "estree", "node"]
+  },
+  "include": [
+    "lib/**/*.ts",
+    "scripts/**/*.ts",
+    "tests/**/*.ts",
+    "tsdown.config.ts"
+  ]
+}
