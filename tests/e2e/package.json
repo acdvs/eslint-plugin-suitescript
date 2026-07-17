@@ -1,0 +1,13 @@
+{
+  "name": "e2e",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "eslint": "^10.7.0",
+    "eslint-plugin-suitescript": "workspace:*"
+  }
+}

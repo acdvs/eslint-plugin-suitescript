@@ -43,6 +43,15 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2
 
+  tests/e2e:
+    dependencies:
+      eslint:
+        specifier: ^10.7.0
+        version: 10.7.0
+      eslint-plugin-suitescript:
+        specifier: workspace:*
+        version: link:../..
+
 packages:
 
   '@acdvs/eslint-plugin-amd@1.0.0':

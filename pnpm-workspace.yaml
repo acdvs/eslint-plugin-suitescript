@@ -1,4 +1,4 @@
 allowBuilds:
   esbuild: false
-minimumReleaseAgeExclude:
-  - '@acdvs/eslint-plugin-amd@1.0.0'
+packages:
+  - tests/e2e
